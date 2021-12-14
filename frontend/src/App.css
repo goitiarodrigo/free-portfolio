@@ -1,0 +1,114 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+li a {
+  text-decoration: none;
+}
+
+ul img {
+  height: 50px;
+  width: 50px;
+  border-radius: 100px;
+}
+
+div .navLinks {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 60vw;
+}
+
+div .profileUser {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 10vw;
+  align-self: flex-end;
+}
+
+ul {
+  justify-content: space-between !important;
+  width: 90vw;
+}
+
+div .cardsContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+div .cardInfo {
+  margin: 5vh;
+  width: 15vw;
+  height: 15vh;
+
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0px 0px 41px -5px rgba(0,0,0,0.5);
+-webkit-box-shadow: 0px 0px 41px -5px rgba(0,0,0,0.5);
+-moz-box-shadow: 0px 0px 41px -5px rgba(0,0,0,0.5);
+}
+
+div .messagesContainer {
+  width: 35vw;
+  height: 60vh;
+  background-color: red;
+}
+
+div .newPortfolioContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+div .photoProject {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top: 2rem;
+  border-radius: 10px;
+}
+
+input.inputPhoto {
+  display: none;
+}
+
+.labelInput .photo {
+  text-align: end;
+}
+
+label.labelInput {
+  cursor: pointer;
+  background-size: 10%;
+  background-repeat: no-repeat;
+  margin-bottom: 10px;
+}
+
+.newProjectContainer, .profileContainer {
+  width: 100vw;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputsProjectContainer {
+  width: 60vw;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.inputsProfileContainer {
+  width: 60vw;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+

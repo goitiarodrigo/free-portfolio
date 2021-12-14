@@ -19,7 +19,7 @@ const LogButtons = () => {
 
     const { linkedInLogin } = useLinkedIn({
         scope: "r_emailaddress r_liteprofile",
-        clientId: "7751rt1ig2ixgz",
+        clientId: "7857y6gpeq9cr5",
         redirectUri: `${window.location.origin}/linkedin/auth`,
         onSuccess: async (authCode: string) => {
           const {
@@ -27,7 +27,7 @@ const LogButtons = () => {
           } = await axios.post(`${HOST}/api/users/getProfileByLinkedin`, {
             authCode,
           })
-          
+          console.log(response)
         },
       })
 

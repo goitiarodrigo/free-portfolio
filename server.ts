@@ -2,7 +2,7 @@ const express = require("express")
 const app = express()
 const cors = require("cors")
 require("dotenv").config()
-require("./configs/database")
+require("./src/configs/database")
 // const router = require("./routes")
 
 app.use(cors())

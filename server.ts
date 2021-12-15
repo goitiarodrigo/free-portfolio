@@ -1,13 +1,16 @@
 const express = require("express")
-const app = express()
 const cors = require("cors")
 require("dotenv").config()
+const router = require("./src/routes/index")
 require("./src/configs/database")
-// const router = require("./routes")
+require("./src/configs/passport")
+const app = express()
+const jwt = require("jsonwebtoken")
+
 
 app.use(cors())
 app.use(express.json())
 
-// app.use("/api", router)
+app.use("/api", router)
 
 app.listen(4000, ()=>console.log("Connected"))

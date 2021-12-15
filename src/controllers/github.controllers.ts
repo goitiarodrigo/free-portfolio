@@ -1,8 +1,8 @@
 import axios from "axios"
-import {Request, Response} from "express"
 
 
-export const getProfileGit = async (req: Request, res: Response) => {
+
+export const getProfileGit = async (req: any, res: any) => {
     try {
       const response = await axios.post(
         `https://github.com/login/oauth/access_token/?client_id=cd6173a77b378f016cdc&client_secret=50d27d9328db5e0900317b05fafe8164db2d53da&code=${req.body.authCode}`

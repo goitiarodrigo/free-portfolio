@@ -1,8 +1,8 @@
 import axios from "axios"
-import { Request, Response } from "express"
+
 
 const linkedinControllers = {
-  getToken: async (req: Request, res: Response) => {
+  getToken: async (req: any, res: any) => {
     try {
       var response = await axios.post(
         `https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&client_id=7857y6gpeq9cr5&client_secret=qMyWlw8wbjEaEUNN&code=${req.body.authCode}&redirect_uri=http://localhost:3000/linkedin/auth`
@@ -13,7 +13,7 @@ const linkedinControllers = {
     }
   },
 
-  getProfile: async (req: Request, res: Response) => {
+  getProfile: async (req: any, res: any) => {
     try {
       const {
         data: { access_token },

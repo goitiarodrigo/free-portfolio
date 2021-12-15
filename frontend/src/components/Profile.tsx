@@ -92,6 +92,7 @@ const Profile = () => {
           <textarea
             className="form-control"
             placeholder="Descripción tuya"
+            name="description"
           ></textarea>
           <label className="labelInput" htmlFor="inputPhoto">
             Foto de presentación (mejor calidad posible)

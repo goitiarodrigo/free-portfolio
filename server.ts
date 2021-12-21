@@ -6,11 +6,13 @@ require("./src/configs/database")
 require("./src/configs/passport")
 const app = express()
 const jwt = require("jsonwebtoken")
+const morgan = require("morgan")
 
 
 app.use(cors())
 app.use(express.json())
+app.use(morgan("dev"))
 
 app.use("/api", router)
 
-app.listen(4000, ()=>console.log("Connected"))
+app.listen(4000, ()=>console.log("Server is on"))

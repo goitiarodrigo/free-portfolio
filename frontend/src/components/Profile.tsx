@@ -6,16 +6,9 @@ const Profile = () => {
         <div className="inputsProfileContainer">
           <input
             type="text"
-            name="name"
+            name="fullName"
             className="form-control"
-            placeholder="Nombre"
-            required={true}
-          />
-          <input
-            type="text"
-            name="lastName"
-            className="form-control"
-            placeholder="Apellido"
+            placeholder="Nombre y apellido"
             required={true}
           />
           <input
@@ -82,25 +75,14 @@ const Profile = () => {
             placeholder="Tecnologías que utilizas, sin comas ni puntos. Ej: Html Css Js"
             required={true}
           />
-          <input
-            type="text"
-            name=""
-            className="form-control"
-            placeholder=""
-            required={true}
-          />
           <textarea
             className="form-control"
             placeholder="Descripción tuya"
             name="description"
           ></textarea>
-          <label className="labelInput" htmlFor="inputPhoto">
-            Foto de presentación (mejor calidad posible)
-          </label>
           <input
-            className="inputPhoto"
+            className="form-control"
             type="file"
-            id="inputPhoto"
             name="projectPhoto"
             required={true}
           />

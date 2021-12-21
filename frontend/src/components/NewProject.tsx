@@ -22,13 +22,10 @@ const NewProject = () => {
             placeholder="Link del proyecto"
             name="linkProject"
           />
-          <label className="labelInput" htmlFor="inputPhoto">
-            Subir foto de proyecto
-          </label>
+          
           <input
-            className="inputPhoto"
+            className="form-control"
             type="file"
-            id="inputPhoto"
             name="projectPhoto"
           />
           <textarea

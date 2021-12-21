@@ -18,7 +18,7 @@ const linkedinControllers = {
       const {
         data: { access_token },
       } = await axios.post(
-        `https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&client_id=7751rt1ig2ixgz&client_secret=iEh8e6favisdGbt6&code=${req.body.authCode}&redirect_uri=http://localhost:3000/linkedin/auth`
+        `https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&client_id=7857y6gpeq9cr5&client_secret=qMyWlw8wbjEaEUNN&code=${req.body.authCode}&redirect_uri=http://localhost:3000/linkedin/auth`
       )
       const init = {
         headers: {

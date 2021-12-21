@@ -1,19 +1,38 @@
 import { useLinkedIn } from "react-linkedin-login-oauth2"
 import LoginGithub from "react-login-github"
-import { GoogleLogin, GoogleLoginResponse, GoogleLoginResponseOffline } from "react-google-login"
+import { GoogleLogin } from "react-google-login"
 import axios from "axios"
+import { useState } from "react"
+import { newUser } from "./interfaces"
 
 
 const LogButtons = () => {
 
+    const [newUser, setNewuser] = useState<newUser>()
+
     const HOST: string = "http://localhost:4000"
 
-    const responseGoogle = (response: GoogleLoginResponse | GoogleLoginResponseOffline): void => {
-        console.log(response)
+    const responseGoogle = (response: any) => {
+        const { name, googleId, imageUrl, email } = response.profileObj
+        setNewuser({
+            fullName: name,
+            email,
+            photo: imageUrl,
+            password: googleId,
+            type: "google",
+        })
+          
     }
 
 
-    const onSuccess = (response: any): void => console.log(response);
+    const onSuccess = async (response: any): Promise<void> => {
+        
+        const res = await axios.post(`${HOST}/api/users/getProfileByGit`, {
+            authCode: response.code,
+          })
+          setNewuser({...res.data.response, type: "git"})
+          
+    }
     const onFailure = (response: any): void => console.error(response);
 
 
@@ -27,9 +46,12 @@ const LogButtons = () => {
           } = await axios.post(`${HOST}/api/users/getProfileByLinkedin`, {
             authCode,
           })
-          console.log(response)
+          setNewuser({...response, type: "linkedin"})
+          
         },
       })
+
+      
 
     return (
         <>
@@ -39,6 +61,7 @@ const LogButtons = () => {
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
                 cookiePolicy={"single_host_origin"}
+                responseType='code,token'
             />
             
             <LoginGithub

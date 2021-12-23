@@ -1,6 +1,6 @@
 import CardsInfo from "../components/CardsInfo"
 import Graphic from "../components/Graphic"
-import LastMessages from "../components/LastsMessage"
+import LastMessages from "../components/LastsMessages"
 import PanelAdmin from "../components/PanelAdmin"
 
 

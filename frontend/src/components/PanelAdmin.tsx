@@ -1,6 +1,12 @@
+import { useContext } from "react"
 import { Link, NavLink } from "react-router-dom"
+import { UserContext } from "../context/UserContext"
 
 const PanelAdmin = () => {
+
+    const { userState } = useContext(UserContext)
+  const { token, fullName, photoProfile } = userState
+
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -27,16 +33,19 @@ const PanelAdmin = () => {
                                 <li className="nav-item">
                                     <NavLink to="/newportfolio">Nuevo portfolio</NavLink>
                                 </li>
-                                <li className="nav-item">
-                                    <NavLink to="/signin">Ingresar</NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink to="/signup">Registrarse</NavLink>
-                                </li>
+                                {!token &&
+                                <>
+                                    <li className="nav-item">
+                                        <NavLink to="/signin">Ingresar</NavLink>
+                                    </li>
+                                    <li className="nav-item">
+                                        <NavLink to="/signup">Registrarse</NavLink>
+                                    </li>
+                                </>}
                             </div>
                             <div className="profileUser">
-                                <p>Rodrigo Goitia</p>
-                                <img src="https://previews.123rf.com/images/jemastock/jemastock1611/jemastock161104716/69134408-icono-de-perfil-de-cabeza-de-hombre-hombre-avatar-persona-y-personas-tema-dise%C3%B1o-aislado-ilustraci%C3%B3n.jpg" alt="..."/>
+                                <p>{fullName}</p>
+                                <img src={photoProfile} alt="..."/>
                                 
                             </div>
                         </ul>

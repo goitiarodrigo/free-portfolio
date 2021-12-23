@@ -53,7 +53,9 @@ const projectsControllers = {
         }catch(err) {
             res.json({success: false, response: err})
         }
-    }
+    },
+
+    
 }
 
 export default projectsControllers

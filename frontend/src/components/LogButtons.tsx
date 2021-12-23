@@ -2,27 +2,37 @@ import { useLinkedIn } from "react-linkedin-login-oauth2"
 import LoginGithub from "react-login-github"
 import { GoogleLogin } from "react-google-login"
 import axios from "axios"
-import { useState } from "react"
-import { newUser } from "./interfaces"
+import { useCallback, useContext, useEffect, useState } from "react"
+import { newUser } from "./data"
+import { UserContext } from "../context/UserContext"
+import toast, { Toaster } from "react-hot-toast"
+import { useNavigate } from "react-router-dom"
 
 
-const LogButtons = () => {
 
-    const [newUser, setNewuser] = useState<newUser>()
+const LogButtons = ({ sign }) => {
+
+    const navigate = useNavigate()
+    const { signUp, signIn, userState } = useContext(UserContext)
+    
 
     const HOST: string = "http://localhost:4000"
 
-    const responseGoogle = (response: any) => {
+    const responseGoogle = async (response: any) => {
+
         const { name, googleId, imageUrl, email } = response.profileObj
-        setNewuser({
+        let newUser = {
             fullName: name,
             email,
-            photo: imageUrl,
+            photoProfile: imageUrl,
             password: googleId,
-            type: "google",
-        })
-          
+        }
+        
+        signUser(newUser)
+        
     }
+
+     
 
 
     const onSuccess = async (response: any): Promise<void> => {
@@ -30,7 +40,9 @@ const LogButtons = () => {
         const res = await axios.post(`${HOST}/api/users/getProfileByGit`, {
             authCode: response.code,
           })
-          setNewuser({...res.data.response, type: "git"})
+          let newUser = {...res.data.response}
+          
+          signUser(newUser)
           
     }
     const onFailure = (response: any): void => console.error(response);
@@ -46,15 +58,36 @@ const LogButtons = () => {
           } = await axios.post(`${HOST}/api/users/getProfileByLinkedin`, {
             authCode,
           })
-          setNewuser({...response, type: "linkedin"})
+          let newUser = {...response}
+          signUser(newUser)
           
         },
       })
 
-      
+     const signUser = async (newUser: newUser) => {
+         try {
+            let res =  sign === "signUp" ? await signUp(newUser) : await signIn(newUser)
+                 if (res.success){ 
+                     toast.success(`Bienvenido/a ${userState.fullName}`, {
+                         duration: 800
+                     })
+                     navigate("/")
+                 } else {
+                     toast.error(res.response, {
+                         duration: 800
+                     })
+                 }
+             } catch(error: any) {
+                 toast.error(error, {
+                     duration: 700
+                 })
+             }
+           
+        }
 
     return (
-        <>
+        <>       
+            <Toaster />     
             <GoogleLogin
                 clientId="39819837167-ghabosg6m11bb1vjmcn33sj6iqsu1qgq.apps.googleusercontent.com"
                 buttonText="Iniciar sesión"

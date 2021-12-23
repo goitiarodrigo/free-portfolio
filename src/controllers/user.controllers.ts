@@ -7,7 +7,6 @@ interface userInfo {
     email: string,
     password: string,
     fullName: string,
-    photoProfile?: string,
     _id?: string,
     git?: string,
     linkedin?: string,
@@ -15,14 +14,15 @@ interface userInfo {
     degree?: string,
     technologies?: string[],
     description: string,
-    photo: string,
+    photoProfile: string,
+    _doc: any
 }
 
 
 const userControllers = {
     signUp: async (req: any, res: any) => {
         try {
-            let {email, password, fullName}: userInfo = req.body
+            let {email, password, fullName, photoProfile}: userInfo = req.body
             let hashedPassword: string = bcryptjs.hashSync(password)
             let userExisted: string = await User.findOne({email})
             if (userExisted){
@@ -31,27 +31,31 @@ const userControllers = {
             const newUser = new User({
                 fullName,
                 email,
-                password: hashedPassword, 
+                password: hashedPassword,
+                photoProfile, 
             })
-            let newUserRegistered: userInfo = await newUser.save()
-            const token = jwt.sign({...newUser}, process.env.SECRETORKEY)
-            res.json({success: true, response: {token, _id: newUserRegistered._id}})
+            let newRegisteredUser: userInfo = await newUser.save()
+            const token = jwt.sign({_id: newUser._id}, process.env.SECRETORKEY)
+            delete newRegisteredUser._doc.password
+            res.json({success: true, response: {token, newRegisteredUser}})
             
-        }catch(err){
-            res.json({success: false, response: err})
+        }catch(err: any){
+            res.json({success: false, response: err.message})
         }
     },
 
     signIn: async (req: any, res: any) => {
+        
         try {
-            let {email, password}: userInfo = req.body
+            let { email }: userInfo = req.body
             const userFound: userInfo = await User.findOne({email})
-            if (!userFound) throw new Error ("Usuario o contraseña incorrecta")
-            if (!bcryptjs.compareSync(password, userFound.password)) throw new Error ("Usuario o contraseña incorrecta")
+            if (!userFound) throw new Error ("Usuario no registrado")
             const token = jwt.sign({...userFound}, process.env.SECRETORKEY)
-            res.json({success: true, response: {token, _id: userFound._id}})
-        }catch(err){
-            res.json({success: false, response: err})
+            delete userFound._doc.password
+            
+            res.json({success: true, response: {token, userFound} })
+        }catch(err: any){
+            res.json({success: false, response: err.message})
         }
     },
 
@@ -63,10 +67,22 @@ const userControllers = {
             res.json({success: false, response: err})
         }
     },
+
     verifyToken: (req: any, res: any) => {
         const {email, fullName, photo, _id} = req.user
         res.json({email, fullName, photo, _id})
     },
+
+    messageAction: async (req: any, res: any) => {
+        try {
+            const {message, fullName, email} = req.body
+            let addMessage = await User.findOneAndUpdate({_id: req.params.id}, {$push: {messages: { message, fullName, email, date: Date() }}}, {new: true})
+            res.json({success: true, response: addMessage.messages})
+        }catch(error: any) {
+            res.json({success: false, response: error.message})
+        }
+
+    }
 
 }
 

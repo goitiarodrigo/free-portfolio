@@ -11,10 +11,16 @@ const UserSchema = new mongoose.Schema(
         degree: {type: String},
         technologies: {type: Array},
         description: {type: String},
-        photo: {type: String},
-        type: String
-    }
-)
+        photoProfile: {type: String},
+        messages: [
+            {
+                message: { type: String},
+                email: {type: String},
+                fullName: {type: String},
+                date: {type: String}
+            }
+        ] 
+    })
 
 const User = mongoose.model("user", UserSchema)
 

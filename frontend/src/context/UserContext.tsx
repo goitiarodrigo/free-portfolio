@@ -6,6 +6,7 @@ interface getProjectsProps {
     signUp: (newUser: newUser) => any
     signIn: (newUser: newUser) => any
     addMessage: (message: any, id: string) => any
+    uploadNewProject: (project: any, photo: any) => any
     userState: newUser
 }
 

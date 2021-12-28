@@ -1,5 +1,10 @@
 
 
+
+type countVisit = {visit: number, _id: string}
+type countScore = {score: number, _id: string}
+
+
 export  interface newUser {
       email: string,
       password?: string,
@@ -13,7 +18,10 @@ export  interface newUser {
       technologies?: string[],
       description?: string,
       token?: string,
-      messages?: string[]
+      messages?: string[],
+      visits?: countVisit[],
+      downloadedCv?: number,
+      allScores?: countScore[],
   }
 
 export const initialState = {
@@ -29,7 +37,10 @@ export const initialState = {
   technologies: [],
   description: "",
   token: "",
-  messages: []
+  messages: [],
+  visits: [],
+  downloadedCv: 0,
+  allScores: []
 }
     
     

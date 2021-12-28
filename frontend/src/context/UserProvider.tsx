@@ -18,7 +18,7 @@ export const UserProvider = ({children}: props) => {
     const [userState, dispatch] = useReducer(userReducer, initialState)
 
     const signUp = async (object: newUser) => {
-        console.log(object)
+        
         let res = await axios.post("http://localhost:4000/api/user/signup", object)
         console.log(res.data.response)
         if (res.data.success) dispatch({type: "SIGN_UP", payload: res.data.response})
@@ -26,7 +26,7 @@ export const UserProvider = ({children}: props) => {
     }
 
     const signIn = async (object: newUser) => {
-        console.log(object)
+        
         let res = await axios.post("http://localhost:4000/api/user/signin", object)
         if (res.data.success) dispatch({type: "SIGN_IN", payload: res.data.response})
         return res.data
@@ -34,6 +34,12 @@ export const UserProvider = ({children}: props) => {
 
     const getProjects = async () => {
         return await axios.get("http://localhost:4000/api/project/getprojects")
+    }
+
+    const uploadNewProject = async (project, photo) => {
+        let res = await axios.post("http://localhost:4000/api/project/newproject", {project, photo})
+        if (res.data.success) dispatch({type: "NEW_PROJECT", payload: res.data.response})
+        return res.data
     }
 
     const addMessage = async (message, id) => {
@@ -46,6 +52,7 @@ export const UserProvider = ({children}: props) => {
             signUp,
             signIn,
             addMessage,
+            uploadNewProject,
             userState
             
         }}>

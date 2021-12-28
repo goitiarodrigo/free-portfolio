@@ -6,7 +6,8 @@ const ProjectSchema = new mongoose.Schema(
         linkGit: String,
         linkProject: String,
         projectPhoto: {type: String, required: true},
-        description: {type: String, required: true}
+        description: {type: String, required: true},
+        userId: {type:mongoose.Types.ObjectId, ref: "user"}
     }
 )
 

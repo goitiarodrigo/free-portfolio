@@ -7,11 +7,13 @@ require("./src/configs/passport")
 const app = express()
 const jwt = require("jsonwebtoken")
 const morgan = require("morgan")
+const fileupload = require("express-fileupload")
 
 
 app.use(cors())
 app.use(express.json())
 app.use(morgan("dev"))
+app.use(fileupload())
 
 app.use("/api", router)
 

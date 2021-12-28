@@ -82,6 +82,42 @@ const userControllers = {
             res.json({success: false, response: error.message})
         }
 
+    },
+
+    visitsAction: async (req: any, res: any) => {
+        try {
+            const {visit, newMonth} = req.body
+            if (newMonth) {
+                let user = await User.findOneAndUpdate({_id: req.params.id}, {$push: {visits: {visit}}}, {new: true})
+                res.json({success: true, response: user.visits})
+            } else {
+                let user = await User.findOneAndUpdate({"visits._id": req.params.id}, {$set: {"visits.$.visit": visit}}, {new: true})
+                res.json({success: true, response: user.visits})
+            }
+        }catch(error:any) {
+            res.json({success: false, response: error.message})
+        }
+    },
+
+    cvAction: async (req: any, res: any) => {
+        try {
+            
+            let user = await User.findOneAndUpdate({_id: req.params.id}, {...req.body}, {new: true})
+            res.json({success: true, response: user.downloadedCv})
+        }catch(error: any) {
+            res.json({success: false, response: error.message})
+        }
+    },
+
+    scoreAction: async (req: any, res: any) => {
+        
+        try {
+            const { score } = req.body
+            let user = await User.findOneAndUpdate({_id: req.params.id}, {$push: {allScores: {score}}}, {new: true})
+            res.json({success: true, response: user.allScores})
+        }catch(error: any) {
+            res.json({success: false, response: error.message})
+        }
     }
 
 }

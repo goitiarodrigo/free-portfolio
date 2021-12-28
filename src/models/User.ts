@@ -12,6 +12,17 @@ const UserSchema = new mongoose.Schema(
         technologies: {type: Array},
         description: {type: String},
         photoProfile: {type: String},
+        visits: [
+            { default: 0,
+                visit: {type: Number}
+            }
+        ],
+        downloadedCv:  Number,
+        allScores: [
+           {
+                score: {type: Number}
+           }
+        ],
         messages: [
             {
                 message: { type: String},

@@ -5,15 +5,16 @@ type countVisit = {visit: number, _id: string}
 type countScore = {score: number, _id: string}
 
 
+
 export  interface newUser {
-      email: string,
+      email?: string,
       password?: string,
-      fullName: string,
+      fullName?: string,
       photoProfile?: string,
       _id?: string,
       git?: string,
       linkedin?: string,
-      strength?: string[],
+      strength?: string,
       degree?: string,
       technologies?: string[],
       description?: string,
@@ -24,6 +25,17 @@ export  interface newUser {
       allScores?: countScore[],
   }
 
+export type projects = [{
+  description: string,
+  linkGit: string,
+  linkProject: string,
+  projectPhoto: string,
+  title: string,
+  userId: string,
+  _id: string}
+]
+  
+
 export const initialState = {
   email: "",
   password: "",
@@ -32,7 +44,7 @@ export const initialState = {
   _id: "",
   git: "",
   linkedin: "",
-  strength: [],
+  strength: "",
   degree: "",
   technologies: [],
   description: "",

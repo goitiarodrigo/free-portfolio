@@ -1,45 +1,46 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../context/UserContext"
+import { projects } from "./data"
 
 
 
 const MyProjects = () => {
 
-    const [num, setNum] = useState(0)
+    const [projectss, setProjects] = useState<projects>()
+    const [loading, setLoading] = useState(false)
 
-    const { getProjects } = useContext(UserContext)
+    const { getProjects, userState } = useContext(UserContext)
+    const { _id } = userState
     
 
-   const getProjectss = async() => {
-   let res = await getProjects()
-   console.log(res)
-        
+   const getProjectss = async(id) => {
+    let res = await getProjects(id)
+    setProjects(res.data.response)
+    setLoading(true)
    } 
 
-   console.log(num)
-    return (
-        
-            
-            <div className="bg-danger d-flex flex-wrap justify-content-around">
-                
-                <div className="photoProject" style={{backgroundImage: 'url("https://i.postimg.cc/R0pjQ1Pq/Sin-t-tulo-Tu-historia-1920-x-1080-px.png")', width: "45vw", height: "50vh"}}>
-                    <h3>Fakebook</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Temporibus, consequuntur optio enim deleniti fugit ea dolorem, debitis accusamus impedit error voluptatum recusandae unde saepe ullam cumque quos ad id nostrum.</p>
-                </div>
-                <div className="photoProject" style={{backgroundImage: 'url("https://i.postimg.cc/R0pjQ1Pq/Sin-t-tulo-Tu-historia-1920-x-1080-px.png")', width: "45vw", height: "50vh"}}>
-                    <h3>Fakebook</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Temporibus, consequuntur optio enim deleniti fugit ea dolorem, debitis accusamus impedit error voluptatum recusandae unde saepe ullam cumque quos ad id nostrum.</p>
-                </div>
-                <div className="photoProject" style={{backgroundImage: 'url("https://i.postimg.cc/R0pjQ1Pq/Sin-t-tulo-Tu-historia-1920-x-1080-px.png")', width: "45vw", height: "50vh"}}>
-                    <h3>Fakebook</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Temporibus, consequuntur optio enim deleniti fugit ea dolorem, debitis accusamus impedit error voluptatum recusandae unde saepe ullam cumque quos ad id nostrum.</p>
-                </div>
-                
-                <button onClick={getProjectss}>Acá</button>
+   useEffect(()=> {
+    getProjectss(_id)
+   }, [])
 
-            </div>
-        
-        
+   if (!loading) {
+    <div className="bg-danger d-flex flex-wrap justify-content-around">
+        <h1>Loading...</h1>
+    </div>
+   }
+
+    return (
+            
+        <div className="bg-danger d-flex flex-wrap justify-content-around">
+            {projectss?.map(project => {
+                return (
+                    <div key={project._id} className="photoProject" style={{backgroundImage: `url(${project.projectPhoto})`, width: "45vw", height: "50vh"}}>
+                        <h3>{project.title}</h3>
+                        <p>{project.description}</p>
+                    </div>
+                )
+                })}  
+        </div>
     )
 }
 

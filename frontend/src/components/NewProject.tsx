@@ -1,11 +1,12 @@
 import axios from "axios";
-import { ButtonHTMLAttributes, ChangeEvent, FormEvent, MouseEvent, MouseEventHandler, useContext, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
 
 
 const NewProject = () => {
 
-  const { uploadNewProject } = useContext(UserContext)
+  const { uploadNewProject, userState } = useContext(UserContext)
+  const { _id } = userState
 
   const [newProject, setNewproject] = useState({
     title: "",
@@ -32,7 +33,7 @@ const NewProject = () => {
     FD.append("upload_preset", "Images")
     let res = await axios.post("https://api.cloudinary.com/v1_1/mukeniola/image/upload", FD)
     let photo = res.data.secure_url
-    let response = await uploadNewProject(newProject, photo)
+    let response = await uploadNewProject(newProject, photo, _id)
     setNewproject({title: "", linkGit: "", linkProject: "", projectPhoto: "", description: ""})
   }
 

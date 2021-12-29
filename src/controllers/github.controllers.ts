@@ -21,7 +21,7 @@ const githubControllers = {
       const allData = {
         fullName: name,
         password: node_id,
-        photo: avatar_url,
+        photoProfile: avatar_url,
         email,
       }
       res.json({ success: true, response: allData })

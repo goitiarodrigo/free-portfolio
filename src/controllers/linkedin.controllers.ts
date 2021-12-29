@@ -33,7 +33,7 @@ const linkedinControllers = {
         "https://api.linkedin.com/v2/me?projection=(id,firstName,lastName,profilePicture(displayImage~:playableStreams))",
         init
       )
-      const photo: string =
+      const photoProfile: string =
         profilePhoto.data.profilePicture["displayImage~"].elements[0]
           .identifiers[0].identifier
       const mail = await axios.get(
@@ -44,7 +44,7 @@ const linkedinControllers = {
       const allData = {
         fullName: `${localizedFirstName} ${localizedLastName}`,
         password: id,
-        photo,
+        photoProfile,
         email,
       }
       res.json({ success: true, response: allData })

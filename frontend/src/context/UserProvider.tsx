@@ -20,7 +20,6 @@ export const UserProvider = ({children}: props) => {
     const signUp = async (object: newUser) => {
         
         let res = await axios.post("http://localhost:4000/api/user/signup", object)
-        console.log(res.data.response)
         if (res.data.success) dispatch({type: "SIGN_UP", payload: res.data.response})
         return res.data
     }
@@ -32,12 +31,12 @@ export const UserProvider = ({children}: props) => {
         return res.data
     }
 
-    const getProjects = async () => {
-        return await axios.get("http://localhost:4000/api/project/getprojects")
+    const getProjects = async (id) => {
+        return  await axios.get(`http://localhost:4000/api/project/getprojects/${id}`)
     }
 
-    const uploadNewProject = async (project, photo) => {
-        let res = await axios.post("http://localhost:4000/api/project/newproject", {project, photo})
+    const uploadNewProject = async (project, photo, id) => {
+        let res = await axios.post("http://localhost:4000/api/project/newproject", {project, photo, id})
         if (res.data.success) dispatch({type: "NEW_PROJECT", payload: res.data.response})
         return res.data
     }

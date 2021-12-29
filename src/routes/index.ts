@@ -20,7 +20,7 @@ router.route("/user/editprofile/:id").put(userControllers.completeProfile)
 router.route("/project/newproject").post(projectsControllers.newProject)
 router.route("/project/editproject/:id").put(projectsControllers.editProject)
 router.route("/project/deleteproject/:id").delete(projectsControllers.deleteProject)
-router.route("/project/getprojects").get(projectsControllers.getProjects)
+router.route("/project/getprojects/:id").get(projectsControllers.getProjects)
 router.route("/project/uploadPhoto").post(projectsControllers.uploadPhoto)
 
 

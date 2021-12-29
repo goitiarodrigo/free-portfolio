@@ -7,9 +7,9 @@ const UserSchema = new mongoose.Schema(
         password: {type: String},
         git: {type: String},
         linkedin: {type: String},
-        strength: {type: Array},
+        strength: [{type: Array}],
         degree: {type: String},
-        technologies: {type: Array},
+        technologies: [{type: Array}],
         description: {type: String},
         photoProfile: {type: String},
         visits: [

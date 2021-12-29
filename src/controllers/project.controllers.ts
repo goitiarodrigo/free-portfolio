@@ -7,6 +7,7 @@ interface newProject {
     linkProject?: string,
     projectPhoto: string,
     description: string,
+    userId: string
 }
 
 const projectsControllers = {
@@ -23,15 +24,16 @@ const projectsControllers = {
 
     newProject: async (req: any, res: any) => {
         try {
-            console.log(req.body)
             let {title, linkGit, linkProject, description}: newProject = req.body.project
-            let { photo } = req.body
+            let { photo, id } = req.body
+            
             let newProject = await new Project({
                 title,
                 linkGit,
                 linkProject,
                 projectPhoto: photo,
-                description
+                description,
+                userId: id
             })
             let savedProject = newProject.save()
             res.json({success: true, response: savedProject})
@@ -61,10 +63,10 @@ const projectsControllers = {
 
     getProjects: async (req: any, res: any) => {
         try {
-            let allProjects: string | number | boolean[] = Project.find()
+            let allProjects = await Project.find({userId: req.params.id})
             res.json({success: true, response: allProjects})
-        }catch(err) {
-            res.json({success: false, response: err})
+        }catch(err: any) {
+            res.json({success: false, response: err.message})
         }
     },
 

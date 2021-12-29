@@ -20,6 +20,7 @@ export const userReducer = (state: newUser, action: ActionType): newUser => {
                 visits: action.payload.newRegisteredUser.visits,
                 downloadedCv: action.payload.newRegisteredUser.downloadedCv,
                 allScores: action.payload.newRegisteredUser.allScores,
+                _id: action.payload.newRegisteredUser._id,
                 token: action.payload.token
             }
         case "SIGN_IN":
@@ -31,6 +32,7 @@ export const userReducer = (state: newUser, action: ActionType): newUser => {
                 visits: action.payload.userFound.visits,
                 downloadedCv: action.payload.userFound.downloadedCv,
                 allScores: action.payload.userFound.allScores,
+                _id: action.payload.userFound._id,
                 token: action.payload.token
             }
     

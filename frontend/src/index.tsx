@@ -1,18 +1,17 @@
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import App from './App';
 import PanelAdmin from './components/PanelAdmin';
 import { BrowserRouter } from "react-router-dom"
 import { UserProvider } from './context/UserProvider';
 
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
-
-ReactDOM.render(
+root.render(
   <BrowserRouter>
     <UserProvider>
       <PanelAdmin />
       <App />
       </UserProvider>
   </BrowserRouter>,
-  document.getElementById('root')
 );
 

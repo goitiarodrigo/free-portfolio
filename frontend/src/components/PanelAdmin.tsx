@@ -5,7 +5,7 @@ import { UserContext } from "../context/UserContext"
 const PanelAdmin = () => {
 
     const { userState } = useContext(UserContext)
-  const { token, fullName, photoProfile } = userState
+    const { token, fullName, photoProfile } = userState
 
     return (
         <div>

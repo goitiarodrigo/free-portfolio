@@ -18,30 +18,37 @@ const PanelAdmin = () => {
                         
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <div className="navLinks">
-                                <li className="nav-item">
-                                    <NavLink to = "/">Dashboard</NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink to="/newproject">Nuevo proyecto</NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink to="/myprofile">Mi perfil</NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink to="/myprojects">Mis proyectos</NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink to="/newportfolio">Nuevo portfolio</NavLink>
-                                </li>
-                                {!token &&
-                                <>
-                                    <li className="nav-item">
-                                        <NavLink to="/signin">Ingresar</NavLink>
-                                    </li>
-                                    <li className="nav-item">
-                                        <NavLink to="/signup">Registrarse</NavLink>
-                                    </li>
-                                </>}
+                            
+                                {window.sessionStorage.getItem('token') ?
+                                    <>
+                                        <li className="nav-item">
+                                            <NavLink to ="/home">Dashboard</NavLink>
+                                        </li>
+                                        <li className="nav-item">
+                                            <NavLink to="/newproject">Nuevo proyecto</NavLink>
+                                        </li>
+                                        <li className="nav-item">
+                                            <NavLink to="/profile">Mi perfil</NavLink>
+                                        </li>
+                                        <li className="nav-item">
+                                            <NavLink to="/myprojects">Mis proyectos</NavLink>
+                                        </li>
+                                        <li className="nav-item">
+                                            <NavLink to="/newportfolio">Nuevo portfolio</NavLink>
+                                        </li>
+                                    </>
+                                :
+
+                                    <>
+                                        <li className="nav-item">
+                                            <NavLink to="/signin">Ingresar</NavLink>
+                                        </li>
+                                        <li className="nav-item">
+                                            <NavLink to="/signup">Registrarse</NavLink>
+                                        </li>
+                                    </>
+                                }
+                            
                             </div>
                             <div className="profileUser">
                                 <p>{fullName}</p>

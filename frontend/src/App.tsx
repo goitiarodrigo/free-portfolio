@@ -10,6 +10,7 @@ import { LinkedInCallback } from 'react-linkedin-login-oauth2';
 import SignUp from "./pages/SignUp";
 import { useContext } from "react";
 import { UserContext } from "./context/UserContext";
+import Navigation from "./routes/Navigation";
 
 const App = () => {
 
@@ -18,19 +19,7 @@ const App = () => {
 
   return (
     <div className="App">
-       
-        <Routes>
-          <Route path="/"  element={<Home />} />
-          <Route path="/newportfolio" element={<NewPortfolio />} />
-          <Route path="/myprojects" element={<MyProjects />} />
-          <Route path="/newproject" element={<NewProject />} />
-          <Route path="/myprofile" element={<Profile />} />
-         {!token && <Route path="/signin" element={<SignIn />} />}
-         {!token && <Route path="/signup" element={<SignUp />} />}
-          <Route path="/linkedin/auth" element={<LinkedInCallback />} />
-        </Routes>
-      
-      
+        <Navigation />
     </div>
   );
 }

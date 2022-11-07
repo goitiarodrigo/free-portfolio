@@ -1,0 +1,24 @@
+.footerContainer {
+    height: 10vh;
+    background-color: #15142b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contactToMe {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    width: 100%;
+    margin-right: 2rem;
+}
+
+.contactToMe div {
+    margin-left: 2rem;
+}
+
+.contactToMe div a {
+    margin-left: 1rem;
+}

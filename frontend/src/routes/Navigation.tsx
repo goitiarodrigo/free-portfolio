@@ -3,6 +3,7 @@ import { LinkedInCallback } from 'react-linkedin-login-oauth2'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import SignIn from '../pages/SignIn'
 import SignUp from '../pages/SignUp'
+import AppTemplate from '../portfolioTemplate/AppTemplate'
 import PrivateRoutes from './PrivateRoutes'
 import PublicRoutes from './PublicRoutes'
 import { routes } from './routes'
@@ -16,14 +17,13 @@ const Navigation = () => {
                     <Routes>
                         <Route path='/' element={<PrivateRoutes />}>
                             {
-                                routes.map(route => 
+                                routes.map(route =>
                                     route.private && (
                                         <Route
                                             key={route.path}
                                             path={route.path}
                                             element={<route.Component />}
                                         />
-                                    
                                     )
                                 )
                             }
@@ -34,6 +34,7 @@ const Navigation = () => {
                             <Route path="/signin" element={<SignIn />} />
                             <Route path="/signup" element={<SignUp />} />
                             <Route path="/linkedin/auth" element={<LinkedInCallback />} />
+                            <Route path="/template/:param" element={<AppTemplate />} />
                         </Route>
                     </Routes>
                 </>

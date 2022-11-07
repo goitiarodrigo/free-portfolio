@@ -1,0 +1,209 @@
+div.container {
+    padding-top: 6rem;
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    background-color: #0c0b48;
+    display: flex;
+    justify-content: center;
+}
+
+h1.projectsTittle {
+    font-size: 3rem;
+}
+
+div.projects_containerV1,  div.projects_containerV2{
+    width: 60%;
+    height: 100%;
+    max-height: 95%;
+    overflow: hidden;
+    overflow-y: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+div.title_containerV1, div.title_containerV2 {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 38%;
+    height: 32%;
+}
+
+div.title_containerV1 {
+    position: relative;
+    top: -1rem;
+}
+
+div.title_containerV2 {
+    align-items: flex-end;
+}
+
+div.isImpar_container {
+    display: flex;
+    justify-content: space-between;
+    height: 55%;
+    width: 100%;
+    margin-bottom: 3px;
+}
+
+div.last_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 55%;
+    margin-top: -322px;
+    width: 100%;
+}
+
+
+ /* HACER CONDICIONAL. Si la cantidad de proyectos es impar aplicar odd, caso contrario even */
+div.projects_containerV1 div.project_image:nth-child(odd) { 
+    margin-top: -325px;
+} 
+
+
+div.projects_containerV2 div.project_image:nth-child(odd) { 
+    margin-top: -325px;
+} 
+
+div.project_image {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 49.85%;
+    height: 55%;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 3px;
+}
+
+div.project_image_isImpar {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 49.85%;
+    height: 100%!important;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 3px;
+}
+
+div.description_container {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-left: 2rem;
+    padding-bottom: 1rem;
+}
+
+div.description_container h2 {
+    font-size: 40px;
+}
+
+div.description_container p {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+div.anchor_container {
+    width: 10rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.anchor_container a {
+    padding: 10px 15px;
+    background-color: rgba(255, 255, 255, .35);
+    border-radius: 5px;
+    transition: 750ms;
+}
+
+div.anchor_container a:hover {
+    background-color: rgba(255, 255, 255, 0.578)
+}
+
+div.projects_containerV1::-webkit-scrollbar-thumb, div.projects_containerV2::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, .35);
+    border-radius: 5px;
+  }
+
+div.projects_containerV1::-webkit-scrollbar, div.projects_containerV2::-webkit-scrollbar {
+    width: 0.3rem;
+  }
+
+@media (max-width: 1366px) {
+    div.projects_containerV1, div.projects_containerV2 {
+        width: 80%;
+    }
+}
+
+@media (max-width: 1000px) {
+    div.projects_containerV1, div.projects_containerV2 {
+        width: 95%;
+    }
+}
+
+@media (max-width: 750px) {
+    div.container {
+        height: auto;
+        padding-top: 0;
+        max-height: none;
+    }
+
+    div.projects_containerV1, div.projects_containerV2 {
+        height: auto;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        overflow-y: hidden;
+    }
+
+    div.isImpar_container {
+        flex-direction: column-reverse;
+        height: 45rem;
+    }
+
+    div.project_image_isImpar {
+        width: 100%;
+        height: 40rem !important;
+    }
+
+    div.last_container {
+        margin-top: 0px;
+        flex-direction: column-reverse;
+        align-items: center;
+        height: 45rem
+    }
+
+    div.projects_containerV1 div.project_image:nth-child(odd) { 
+        margin-top: 0px;
+    }
+    
+    div.projects_containerV2 div.project_image:nth-child(odd) { 
+        margin-top: 0px;
+    }
+
+    div.project_image {
+        width: 100%;
+        height: 40rem;
+    }
+
+    div.title_containerV2 {
+        align-self: center;
+    }
+    
+    div.title_containerV1 {
+        align-self: center;
+    }
+
+    div.title_container {
+        width: 100%;
+        padding: 2rem 0;
+    }
+    
+}
+

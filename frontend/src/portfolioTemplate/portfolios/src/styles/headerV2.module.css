@@ -1,0 +1,221 @@
+html * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+div.container {
+    background-color: #121127;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 97vh;
+}
+
+div.header_container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.shape_1 {
+    position: absolute;
+    top: 30%;
+    left: 20px;
+    animation: mover 15s infinite linear;
+}
+
+div.shape_2 {
+    position: absolute;
+    right: 18%;
+    top: 40%;
+    animation: mover 15s infinite linear;
+}
+
+div.shape_3 {
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    animation: mover 15s infinite linear;
+}
+
+div.shape_4 {
+    position: absolute;
+    right: 60%;
+    animation: mover 15s infinite linear;
+}
+
+div.shape_5 {
+    position: absolute;
+    top: 10%;
+    right: 28%;
+    animation: mover 15s infinite linear;
+}
+
+div.shape_6 {
+    position: absolute;
+    bottom: 15%;
+    top: auto;
+    right: 40%; 
+    animation: mover 15s infinite linear;
+}
+
+div.header_container > div h2 {
+    font-size: 6rem;
+    color: white;
+    text-align: right;
+}
+
+div.header_container > div p {
+    font-size: 1.8rem;
+    color: white;
+    text-align: right;
+}
+
+div.header_container div.header {
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 70%;
+    height: 35%;
+}
+
+div.header div:first-child {
+    width: 70%;
+}
+
+div.button_container {
+    align-self: center;
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+}
+
+div.button_container button:first-child {
+    border: none;
+    width: 10rem;
+    height: 3.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background-color: #eb2973;
+    transition: 350ms;
+    cursor: pointer;
+}
+
+div.button_container button:last-child {
+    border: none;
+    width: 10rem;
+    height: 3.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: 350ms;
+    cursor: pointer;
+}
+
+div.button_container button:first-child:hover {
+    background-color: white;
+}
+
+div.button_container button:last-child:hover {
+    background-color: #eb2973;
+}
+
+@keyframes mover {
+    0% {
+        -webkit-transform: translate(0, 0) rotate(0);
+        transform: translate(0, 0) rotate(0);
+    }
+    20% {
+        -webkit-transform: translate(73px, -1px) rotate(36deg);
+        transform: translate(73px, -1px) rotate(36deg);
+    }
+    40% {
+        -webkit-transform: translate(141px, 72px) rotate(72deg);
+        transform: translate(141px, 72px) rotate(72deg);
+    }
+    
+    60% {
+        -webkit-transform: translate(83px, 122px) rotate(108deg);
+        transform: translate(83px, 122px) rotate(108deg);
+    }
+    80% {
+        -webkit-transform: translate(-40px, 72px) rotate(144deg);
+        transform: translate(-40px, 72px) rotate(144deg);
+    }
+    100% {
+        -webkit-transform: translate(0, 0) rotate(0);
+        transform: translate(0, 0) rotate(0);
+    }
+}
+
+@media (max-width: 1366px) {
+    div.button_container {
+        width: 50%;
+    }
+
+    div.description {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 1024px) {
+    div.container {
+        height: 70vh;
+    }
+
+    .shape_1, .shape_2, .shape_3, .shape_4, .shape_5, .shape_6 {
+        display: none !important;
+    }
+
+    div.header {
+        width: 90% !important;
+    }
+}
+
+@media (max-width: 800px) {
+    div.header_container > div h2 {
+        font-size: 5rem;
+    }
+
+    div.button_container {
+        width: 60%;
+    }
+}
+
+@media (max-width: 650px) {
+    div.header_container > div h2 {
+        font-size: 3rem;
+    }
+
+    div.button_container {
+        width: 80%;
+    }
+}
+
+@media (max-width: 500px) {
+    div.button_container {
+        width: 90%;
+    }
+    
+    div.button_container button {
+        width: 7rem !important;
+        height: 2.5rem !important;
+    }
+}
+
+@media (max-width: 400px) {
+    div.header_container > div h2 {
+        font-size: 2rem;
+    }
+
+    div.header_container > div p {
+        font-size: 1.5rem;
+    }
+}
+

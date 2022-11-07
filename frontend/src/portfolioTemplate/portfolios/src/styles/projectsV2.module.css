@@ -1,0 +1,139 @@
+div.container {
+    padding-top: 6rem;
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    background-color: #15142b!important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+div.container h1 {
+    padding-bottom: 3.5rem;
+    font-size: calc(50px + 0.390625vw);
+    font-weight: 700;
+}
+
+div.projects_container {
+    width: 55%;
+    height: 100%;
+    max-height: 95%;
+    overflow: hidden;
+    overflow-y: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+div.project_image {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 47%;
+    height: 55%;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 3%;
+    overflow: hidden;
+}
+
+div.effectFirst {
+    width: 100%;
+    height: 100%;
+    transition: 700ms;
+}
+
+div.effectFirst:hover {
+    background-color: #15142b44;
+}
+
+div.effect {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    transition: 500ms;
+   
+}
+
+div.effect:hover {
+    opacity: 1;
+    
+    transform: translateX(5%)
+}
+
+div.description_container {
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+div.anchor_container {
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.projects_container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, .35);
+    border-radius: 5px;
+  }
+
+.projects_container::-webkit-scrollbar {
+    width: 0.3rem;
+  }
+
+@media (max-width: 1366px) {
+    div.projects_container {
+        width: 65%;
+    }
+
+    div.description_container {
+        width: 90%;
+        height: 50%;
+    }
+}
+
+@media (max-width: 1024px) {
+    div.projects_container {
+        width: 85%;
+    }
+
+    div.description_container {
+        width: 90%;
+        height: 50%;
+    }
+}
+
+@media (max-width: 800px) {
+    div.projects_container {
+        width: 95%;
+    }
+
+    div.description_container {
+        width: 95%;
+        height: 55%;
+    }
+}
+
+@media (max-width: 700px) {
+
+    div.projects_container {
+        width: 85%;
+        justify-content: center;
+    }
+
+    div.description_container {
+        width: 90%;
+        height: 50%;
+    }
+
+    div.project_image {
+        width: 100%;
+    }
+}

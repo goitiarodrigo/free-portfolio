@@ -1,14 +1,21 @@
 import React from 'react'
-import { Navigate, Outlet } from 'react-router-dom'
+import { Navigate, Outlet, useParams } from 'react-router-dom'
 import PanelAdmin from '../components/PanelAdmin'
 
 const PublicRoutes = () => {
+    const { param } = useParams()
+
     return (
         window.sessionStorage.getItem('token') ?
             <Navigate to='/home'/>
                 :
             <>
-                <PanelAdmin />
+                {
+                    !param ?
+                        <PanelAdmin />
+                    :
+                        null
+                }
                 <Outlet />
             </>
      )

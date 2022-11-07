@@ -35,7 +35,6 @@ export const userReducer = (state: newUser, action: ActionType): newUser => {
                 _id: action.payload.userFound._id,
                 token: action.payload.token
             }
-    
         default:
            return state;
     }

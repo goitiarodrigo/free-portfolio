@@ -71,7 +71,7 @@ const LogButtons = ({ sign }) => {
                      toast.success(`Bienvenido/a ${userState.fullName}`, {
                          duration: 800
                      })
-                     navigate("/")
+                     navigate("/home")
                  } else {
                      toast.error(res.response, {
                          duration: 800

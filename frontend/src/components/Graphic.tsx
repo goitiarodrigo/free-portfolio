@@ -1,86 +1,55 @@
-import { useContext } from "react"
+import { useContext, useLayoutEffect, useState } from "react"
 import { UserContext } from "../context/UserContext"
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend,
-  } from 'chart.js';
-  import { Line } from 'react-chartjs-2';
+import ReactApexChart, { Props } from "react-apexcharts";
 
 
 const Graphic = () => {
 
     const { userState } = useContext(UserContext)
     const { visits } = userState
-    visits?.unshift({visit: 0, _id: "1"})
-      
-      ChartJS.register(
-        CategoryScale,
-        LinearScale,
-        PointElement,
-        LineElement,
-        Title,
-        Tooltip,
-        Legend
-      );
-      
-       const options = {
-        responsive: true,
-        interaction: {
-          mode: 'index' as const,
-          intersect: false,
-        },
-        stacked: false,
-        plugins: {
-          title: {
-            display: true,
-            text: 'Promedio de visitas del último mes',
-          },
-        },
-        scales: {
-          y: {
-            type: 'linear' as const,
-            display: true,
-            position: 'left' as const,
-          },
-          y1: {
-            type: 'linear' as const,
-            display: true,
-            position: 'right' as const,
-            grid: {
-              drawOnChartArea: false,
-            },
-          },
-        },
-      };
-      
-      const labels = ["0", 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-      
-      const data = {
-        labels,
-        datasets: [
-          {
-            label: 'Visitas',
-            data: visits?.map((CountVisit) => CountVisit.visit),
-            borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-            yAxisID: 'y',
-          },
-          
-        ],
-      };
+    
+    const [allMonthArr, setAllMonthArr] = useState<string[]>([])
 
+    useLayoutEffect(() => {
+        let currentDate = new Date();
+        const date = new Date()
+        let monthArr: string[] = []
+
+        for (let i = 0; i < 12; i++) {
+            date.setMonth(currentDate.getMonth() - i)
+            monthArr = [...monthArr, date.toLocaleString('es', {month: 'short'})]
+        }
+
+        setAllMonthArr(monthArr.reverse())
+
+    }, [])
+    
+    const state: Props = {
+        series: [{
+            name: 'Visitas',
+            data: [15, 10 , 12, 2, 9, 1, null]
+        }],
+    
+        options: {
+            chart: {
+                type: 'line',
+                toolbar:{
+                    show: false,
+                }
+            },
+            xaxis: {
+                categories: allMonthArr,
+              }
+        }
+    }
+
+    
     
 
     return (
         <>
             <div style={{width: "60vw", height: "60vh" }}>
-                <Line options={options} data={data} />;
+              <ReactApexChart options={state.options} series={state.series} type="line" width={'1000'} height={'500'} />
             </div>
         </>
     )

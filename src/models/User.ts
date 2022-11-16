@@ -13,8 +13,9 @@ const UserSchema = new mongoose.Schema(
         description: {type: String},
         photoProfile: {type: String},
         visits: [
-            { default: 0,
-                visit: {type: Number}
+            {
+                visit: {type: Number},
+                month: {type: String}
             }
         ],
         downloadedCv:  Number,

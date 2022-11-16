@@ -15,6 +15,7 @@ router.route("/user/visit/:id").put(userControllers.visitsAction)
 router.route("/user/download/:id").put(userControllers.cvAction)
 router.route("/user/score/:id").put(userControllers.scoreAction)
 router.route("/user/editprofile/:id").put(userControllers.completeProfile)
+router.route("/user/getUser/:id").get(userControllers.findOneUser)
 
 //Api for projects
 router.route("/project/newproject").post(projectsControllers.newProject)

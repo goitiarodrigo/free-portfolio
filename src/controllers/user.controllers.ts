@@ -84,14 +84,27 @@ const userControllers = {
 
     },
 
+    findOneUser: async (req: any, res: any) => {
+        try {
+            const _id = req.params.id
+            const userFound = await User.find({_id})
+            if (!userFound) {
+                res.json({success: false, response: 'Página no encontrada'})
+            }
+            res.json({success: true, response: userFound[0]})
+        } catch (error: any) {
+            res.json({success: false, response: error.message})
+        }
+    },
+
     visitsAction: async (req: any, res: any) => {
         try {
-            const {visit, newMonth} = req.body
+            const {visit, month, newMonth, _id} = req.body
             if (newMonth) {
-                let user = await User.findOneAndUpdate({_id: req.params.id}, {$push: {visits: {visit}}}, {new: true})
+                let user = await User.findOneAndUpdate({_id: req.params.id}, {$push: {visits: {visit, month}}}, {new: true})
                 res.json({success: true, response: user.visits})
             } else {
-                let user = await User.findOneAndUpdate({"visits._id": req.params.id}, {$set: {"visits.$.visit": visit}}, {new: true})
+                let user = await User.findOneAndUpdate({"visits._id": _id}, {$set: {"visits.$.visit": visit}}, {new: true})
                 res.json({success: true, response: user.visits})
             }
         }catch(error:any) {

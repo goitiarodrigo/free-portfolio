@@ -1,12 +1,12 @@
 
 
 
-type countVisit = {visit: number, _id: string}
+type countVisit = {visit: number, _id: string, month: string}
 type countScore = {score: number, _id: string}
 
 
 
-export  interface newUser {
+export interface newUser {
       email?: string,
       password?: string,
       fullName?: string,

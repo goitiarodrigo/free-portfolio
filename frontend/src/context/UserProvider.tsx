@@ -27,7 +27,12 @@ export const UserProvider = ({children}: props) => {
     const signIn = async (object: newUser) => {
         
         let res = await axios.post("http://localhost:4000/api/user/signin", object)
-        if (res.data.success) dispatch({type: "SIGN_IN", payload: res.data.response})
+        if (res.data.success) {
+            dispatch({type: "SIGN_IN", payload: res.data.response})
+            window.sessionStorage.setItem('token', res.data.response.token)
+            window.sessionStorage.setItem('userData', JSON.stringify(res.data.response.userFound))
+        }
+        
         return res.data
     }
 

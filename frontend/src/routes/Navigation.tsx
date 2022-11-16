@@ -34,8 +34,8 @@ const Navigation = () => {
                             <Route path="/signin" element={<SignIn />} />
                             <Route path="/signup" element={<SignUp />} />
                             <Route path="/linkedin/auth" element={<LinkedInCallback />} />
-                            <Route path="/template/:param" element={<AppTemplate />} />
                         </Route>
+                        <Route path="/template/:param" element={<AppTemplate />} />
                     </Routes>
                 </>
             </Suspense>

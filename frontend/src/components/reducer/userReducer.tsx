@@ -1,4 +1,5 @@
 import { newUser } from "../data"
+const { sessionStorage } = window
 
 export type ActionType = 
    | { type: "SIGN_IN", payload: any }
@@ -8,37 +9,51 @@ export type ActionType =
 
 
 export const userReducer = (state: newUser, action: ActionType): newUser => {
-
+    const { fullName, photoProfile, email, visits, downloadedCv, allScores, _id, token } = action.payload.response[action.payload.accessToData]
     switch (action.type) {
-        
         case "SIGN_UP":
+            sessionStorage.setItem('visits', visits)
+            sessionStorage.setItem('fullName', fullName)
+            sessionStorage.setItem('photoProfile', photoProfile)
+            sessionStorage.setItem('downloadedCv', downloadedCv)
+            sessionStorage.setItem('allScores', allScores)
+            sessionStorage.setItem('email', email)
+            sessionStorage.setItem('_id', _id)
+            sessionStorage.setItem('token', token)
             return {
                 ...state, 
-                fullName: action.payload.newRegisteredUser.fullName,
-                photoProfile: action.payload.newRegisteredUser.photoProfile,
-                email: action.payload.newRegisteredUser.email,
-                visits: action.payload.newRegisteredUser.visits,
-                downloadedCv: action.payload.newRegisteredUser.downloadedCv,
-                allScores: action.payload.newRegisteredUser.allScores,
-                _id: action.payload.newRegisteredUser._id,
+                fullName,
+                photoProfile,
+                email,
+                visits,
+                downloadedCv,
+                allScores,
+                _id,
                 token: action.payload.token
             }
         case "SIGN_IN":
+            sessionStorage.setItem('visits', visits)
+            sessionStorage.setItem('fullName', fullName)
+            sessionStorage.setItem('photoProfile', photoProfile)
+            sessionStorage.setItem('downloadedCv', downloadedCv)
+            sessionStorage.setItem('allScores', allScores)
+            sessionStorage.setItem('email', email)
+            sessionStorage.setItem('_id', _id)
+            sessionStorage.setItem('token', action.payload.token)
             return {
                 ...state, 
-                fullName: action.payload.userFound.fullName,
-                photoProfile: action.payload.userFound.photoProfile,
-                email: action.payload.userFound.email,
-                visits: action.payload.userFound.visits,
-                downloadedCv: action.payload.userFound.downloadedCv,
-                allScores: action.payload.userFound.allScores,
-                _id: action.payload.userFound._id,
+                fullName,
+                photoProfile,
+                email,
+                visits,
+                downloadedCv,
+                allScores,
+                _id,
                 token: action.payload.token
             }
         default:
            return state;
     }
-
 }
 
 

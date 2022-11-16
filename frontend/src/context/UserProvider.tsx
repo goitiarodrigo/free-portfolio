@@ -20,7 +20,7 @@ export const UserProvider = ({children}: props) => {
     const signUp = async (object: newUser) => {
         
         let res = await axios.post("http://localhost:4000/api/user/signup", object)
-        if (res.data.success) dispatch({type: "SIGN_UP", payload: res.data.response})
+        if (res.data.success) dispatch({type: "SIGN_UP", payload: {response: res.data.response, accessToData: 'newRegisteredUser'}})
         return res.data
     }
 
@@ -28,9 +28,7 @@ export const UserProvider = ({children}: props) => {
         
         let res = await axios.post("http://localhost:4000/api/user/signin", object)
         if (res.data.success) {
-            dispatch({type: "SIGN_IN", payload: res.data.response})
-            window.sessionStorage.setItem('token', res.data.response.token)
-            window.sessionStorage.setItem('userData', JSON.stringify(res.data.response.userFound))
+            dispatch({type: "SIGN_IN", payload: {response: res.data.response, accessToData: 'userFound'}})
         }
         
         return res.data

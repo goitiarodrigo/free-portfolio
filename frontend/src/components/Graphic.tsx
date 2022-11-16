@@ -27,7 +27,7 @@ const Graphic = () => {
     const state: Props = {
         series: [{
             name: 'Visitas',
-            data: [15, 10 , 12, 2, 9, 1, null]
+            data: allMonthArr.map((_, index) => visits![index] ? visits![index].visit : 0).reverse()
         }],
     
         options: {

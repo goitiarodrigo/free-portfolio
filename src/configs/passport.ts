@@ -3,7 +3,6 @@ const jwtStrategy = require("passport-jwt").Strategy
 const extractJwt = require("passport-jwt").ExtractJwt
 import User from "../models/User"
 
- 
 export default passport.use(new jwtStrategy({
     jwtFromRequest: extractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey: process.env.SECRETORKEY
@@ -16,5 +15,8 @@ export default passport.use(new jwtStrategy({
             return done(null, res)
         }
     })
-    .catch((error: Error) => done(error, false))
+    .catch((error: Error) => {
+        console.log(error.message)
+        done(error, false)
+    })
 }))

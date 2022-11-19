@@ -1,15 +1,16 @@
 const express = require("express")
-const cors = require("cors")
 require("dotenv").config()
+const cors = require("cors")
+const passport = require("passport")
 const router = require("./src/routes/index")
-require("./src/configs/database")
-require("./src/configs/passport")
 const app = express()
 const jwt = require("jsonwebtoken")
 const morgan = require("morgan")
 const fileupload = require("express-fileupload")
 
+require("./src/configs/database")
 
+app.use(passport.initialize());
 app.use(cors())
 app.use(express.json())
 app.use(morgan("dev"))

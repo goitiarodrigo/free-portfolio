@@ -12,6 +12,7 @@
     "apexcharts": "^3.36.3",
     "axios": "^0.24.0",
     "chart.js": "^3.7.0",
+    "env-cmd": "^10.1.0",
     "moment": "^2.29.4",
     "process": "^0.11.10",
     "react": "^18.2.0",
@@ -29,8 +30,8 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "env-cmd -f .env.staging react-scripts start",
+    "build": "env-cmd -f .env.staging react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

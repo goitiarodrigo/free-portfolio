@@ -1,7 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Anek+Odia:wght@300&family=Rubik:wght@300;400&display=swap');
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: 'Rubik', sans-serif !important;
+}
+
+div.App {
+  background-image: url(./assets/wallpaperjpg.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
 }
 
 li a {
@@ -21,12 +33,16 @@ div .navLinks {
   width: 60vw;
 }
 
-div .profileUser {
+div.profileUser {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 10vw;
+  width: 12vw;
   align-self: flex-end;
+}
+
+div.profileUser p {
+  color: rgba(0, 0, 0, 0.581);
 }
 
 ul {
@@ -124,10 +140,36 @@ label.labelInput {
 
 .newProjectContainer, .profileContainer {
   width: 100vw;
-  height: 90vh;
+  height: 93vh;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+div.signContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 20rem;
+  height: 20rem;
+  border-radius: 8px;
+  -webkit-box-shadow: 0px 0px 69px -15px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 69px -15px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 69px -15px rgba(0,0,0,0.75);
+  background-color: whitesmoke;
+}
+
+div.typeSign {
+  height: 30%;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  color: #0d6dfcbc;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #80808069;
 }
 
 .inputsProjectContainer {

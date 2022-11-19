@@ -69,8 +69,11 @@ const userControllers = {
     },
 
     verifyToken: (req: any, res: any) => {
-        const {email, fullName, photo, _id} = req.user
-        res.json({email, fullName, photo, _id})
+        try {
+            res.json({success: true})
+        } catch (error: any) {
+            res.json(error)
+        }
     },
 
     messageAction: async (req: any, res: any) => {
@@ -81,7 +84,6 @@ const userControllers = {
         }catch(error: any) {
             res.json({success: false, response: error.message})
         }
-
     },
 
     findOneUser: async (req: any, res: any) => {

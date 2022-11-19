@@ -9,7 +9,7 @@ export type ActionType =
 
 
 export const userReducer = (state: newUser, action: ActionType): newUser => {
-    const { fullName, photoProfile, email, visits, downloadedCv, allScores, _id, token } = action.payload.response[action.payload.accessToData]
+    const { fullName, photoProfile, email, visits, downloadedCv, allScores, _id } = action.payload.response[action.payload.accessToData]
     switch (action.type) {
         case "SIGN_UP":
             sessionStorage.setItem('visits', visits)
@@ -19,7 +19,7 @@ export const userReducer = (state: newUser, action: ActionType): newUser => {
             sessionStorage.setItem('allScores', allScores)
             sessionStorage.setItem('email', email)
             sessionStorage.setItem('_id', _id)
-            sessionStorage.setItem('token', token)
+            sessionStorage.setItem('token', action.payload.response.token)
             return {
                 ...state, 
                 fullName,
@@ -39,7 +39,7 @@ export const userReducer = (state: newUser, action: ActionType): newUser => {
             sessionStorage.setItem('allScores', allScores)
             sessionStorage.setItem('email', email)
             sessionStorage.setItem('_id', _id)
-            sessionStorage.setItem('token', action.payload.token)
+            sessionStorage.setItem('token', action.payload.response.token)
             return {
                 ...state, 
                 fullName,

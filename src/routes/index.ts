@@ -1,5 +1,5 @@
 const express = require("express")
-const passport  = require("passport")
+import passport from "../configs/passport"
 import userControllers from "../controllers/user.controllers"
 import projectsControllers from "../controllers/project.controllers"
 import linkedinControllers from "../controllers/linkedin.controllers"
@@ -16,6 +16,7 @@ router.route("/user/download/:id").put(userControllers.cvAction)
 router.route("/user/score/:id").put(userControllers.scoreAction)
 router.route("/user/editprofile/:id").put(userControllers.completeProfile)
 router.route("/user/getUser/:id").get(userControllers.findOneUser)
+router.route("/user/verifyToken").get(passport.authenticate('jwt', {session: false}), userControllers.verifyToken)
 
 //Api for projects
 router.route("/project/newproject").post(projectsControllers.newProject)

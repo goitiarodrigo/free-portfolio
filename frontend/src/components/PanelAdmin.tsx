@@ -7,6 +7,8 @@ const PanelAdmin = () => {
     const { userState } = useContext(UserContext)
     const { token, fullName, photoProfile } = userState
 
+    console.log(fullName)
+
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -50,11 +52,14 @@ const PanelAdmin = () => {
                                 }
                             
                             </div>
-                            <div className="profileUser">
-                                <p>{fullName}</p>
-                                <img src={photoProfile} alt="..."/>
-                                
-                            </div>
+                            {
+                                window.sessionStorage.getItem('token') ?
+                                    <div className="profileUser">
+                                        <p>{fullName}</p>
+                                        <img src={photoProfile} alt="..."/>
+                                    </div>
+                                : null
+                            }
                         </ul>
                         
                     </div>

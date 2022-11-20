@@ -5,7 +5,7 @@ const linkedinControllers = {
   getToken: async (req: any, res: any) => {
     try {
       var response = await axios.post(
-        `https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&client_id=7857y6gpeq9cr5&client_secret=qMyWlw8wbjEaEUNN&code=${req.body.authCode}&redirect_uri=http://localhost:3000/linkedin/auth`
+        `https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&client_id=${process.env.LINCLIENTID}&client_secret=${process.env.LINCLIENTSECRET}&code=${req.body.authCode}&redirect_uri=http://localhost:3000/linkedin/auth`
       )
       res.json({ success: true, response: response.data.access_token })
     } catch (err) {
@@ -18,7 +18,7 @@ const linkedinControllers = {
       const {
         data: { access_token },
       } = await axios.post(
-        `https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&client_id=7857y6gpeq9cr5&client_secret=qMyWlw8wbjEaEUNN&code=${req.body.authCode}&redirect_uri=http://localhost:3000/linkedin/auth`
+        `https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&client_id=${process.env.LINCLIENTID}&client_secret=${process.env.LINCLIENTSECRET}&code=${req.body.authCode}&redirect_uri=http://localhost:3000/linkedin/auth`
       )
       const init = {
         headers: {

@@ -24,10 +24,10 @@ const projectsControllers = {
 
     newProject: async (req: any, res: any) => {
         try {
-            let {title, linkGit, linkProject, description}: newProject = req.body.project
-            let { photo, id } = req.body
+            const {title, linkGit, linkProject, description}: newProject = req.body.project
+            const { photo, id } = req.body
             
-            let newProject = await new Project({
+            const newProject = await new Project({
                 title,
                 linkGit,
                 linkProject,
@@ -35,7 +35,7 @@ const projectsControllers = {
                 description,
                 userId: id
             })
-            let savedProject = newProject.save()
+            const savedProject = newProject.save()
             res.json({success: true, response: savedProject})
 
         }catch(err) {

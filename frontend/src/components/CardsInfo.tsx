@@ -22,7 +22,7 @@ const CardsInfo = () => {
                 <h3>Visitas: {totalVisits}</h3>
             </div>
             <div className="cardInfo">
-                <h3>CV descargado: {!downloadedCv ? 0 : downloadedCv}</h3>
+                <h3>CV descargados: {!downloadedCv ? 0 : downloadedCv}</h3>
             </div>
             <div className="cardInfo">
                 <h3>Puntuación: {!totalScore ? 0 : totalScore}</h3>

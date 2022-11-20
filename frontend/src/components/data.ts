@@ -10,7 +10,7 @@ export interface newUser {
       email?: string,
       password?: string,
       fullName?: string,
-      photoProfile?: string,
+      photoProfile?: any,
       _id?: string,
       git?: string,
       linkedin?: string,
@@ -25,16 +25,15 @@ export interface newUser {
       allScores?: countScore[],
   }
 
-export type projects = [{
+export interface IProject {
   description: string,
   linkGit: string,
   linkProject: string,
-  projectPhoto: string,
+  projectPhoto: any,
   title: string,
-  userId: string,
-  _id: string}
-]
-  
+  userId?: string,
+  _id?: string
+}
 
 export const initialState = {
   email: "",
@@ -54,6 +53,12 @@ export const initialState = {
   downloadedCv: 0,
   allScores: []
 }
+
+export type ActionType = 
+   | { type: "SIGN_IN", payload: any }
+   | { type: "SIGN_UP", payload: any }
+   | {type: "NEW_PROJECT", payload: any}
+   | {type: 'UPDATE_DATA', payload: any}
     
     
 

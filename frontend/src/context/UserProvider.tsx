@@ -5,20 +5,19 @@ import {userReducer} from "../components/reducer/userReducer"
 import { REACT_APP_BACK_URL } from "../constants"
 import { UserContext } from "./UserContext"
 
-
 interface props {
     children: JSX.Element | JSX.Element[]
 }
-
 
 export const UserProvider = ({children}: props) => {
 
     const [userState, dispatch] = useReducer(userReducer, initialState)
 
     const signUp = async (object: newUser) => {
-        
+
         let res = await axios.post(`${REACT_APP_BACK_URL}/user/signup`, object)
         if (res.data.success) dispatch({type: "SIGN_UP", payload: {response: res.data.response, accessToData: 'newRegisteredUser'}})
+
         return res.data
     }
 
@@ -32,6 +31,10 @@ export const UserProvider = ({children}: props) => {
         return res.data
     }
 
+    const signOut = () => {
+        sessionStorage.clear()
+    }
+
     const verifyToken = async (token: string) => {
         const requestOptions: AxiosRequestConfig<any> = {
             headers: {
@@ -41,23 +44,41 @@ export const UserProvider = ({children}: props) => {
         
         try {
             const res = await axios.get(`${REACT_APP_BACK_URL}/user/verifyToken`, requestOptions)
+            if (res.data.success) {
+                dispatch({type: "UPDATE_DATA", payload: {response: res.data, accessToData: 'userFound'}})
+            }
             return res.data
         } catch (err) {
             return err
         }
     }
 
-    const signOut = () => {
-        sessionStorage.clear()
+    const updateProfileUser = async (id: string, token: string, dataToUpdate: any) => {
+        const requestConfig: AxiosRequestConfig<any> = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            method: 'PUT',
+        }
+        
+        try {
+            const response = await axios.put(`${REACT_APP_BACK_URL}/user/editProfile/${id}`, dataToUpdate, requestConfig)
+            if (!response.data.success) throw new Error('Ha ocurrido un error')
+            dispatch({type: "UPDATE_DATA", payload: {response: response.data, accessToData: 'userFound'}})
+
+            return response.data
+        } catch (error) {
+            return error
+        }
     }
 
-    const getProjects = async (id) => {
+    const getProjects = async (id: string) => {
         return  await axios.get(`${REACT_APP_BACK_URL}/project/getprojects/${id}`)
     }
 
     const uploadNewProject = async (project, photo, id) => {
         let res = await axios.post(`${REACT_APP_BACK_URL}/project/newproject`, {project, photo, id})
-        if (res.data.success) dispatch({type: "NEW_PROJECT", payload: res.data.response})
+        if (!res.data.success) return console.log('ERROR!!')
         return res.data
     }
 
@@ -74,7 +95,8 @@ export const UserProvider = ({children}: props) => {
             uploadNewProject,
             userState,
             signOut,
-            verifyToken
+            verifyToken,
+            updateProfileUser
         }}>
             {children}
         </UserContext.Provider>

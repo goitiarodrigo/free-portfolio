@@ -1,6 +1,7 @@
 import User from "../models/User"
 import bcryptjs from "bcryptjs"
 const jwt = require("jsonwebtoken")
+const http = require("http")
 
 
 interface userInfo {
@@ -52,7 +53,6 @@ const userControllers = {
             if (!userFound) throw new Error ("Usuario no registrado")
             const token = jwt.sign({...userFound}, process.env.SECRETORKEY)
             delete userFound._doc.password
-            
             res.json({success: true, response: {token, userFound} })
         }catch(err: any){
             res.json({success: false, response: err.message})
@@ -62,15 +62,17 @@ const userControllers = {
     completeProfile: async (req: any, res: any) => {
         try {
            const userForUpdate: userInfo = await User.findOneAndUpdate({_id: req.params.id}, {...req.body}, {new: true})
-           res.json({success: true, response: {_id: userForUpdate._id}})
+           delete userForUpdate._doc.password
+           res.json({success: true, userFound: userForUpdate})
         }catch(err) {
             res.json({success: false, response: err})
         }
     },
 
     verifyToken: (req: any, res: any) => {
+        const { fullName, photoProfile, email, visits, downloadedCv, allScores, _id, messages, strength, technologies, degree, description, git, linkedin } = req.user
         try {
-            res.json({success: true})
+            res.json({success: true, userFound: { fullName, photoProfile, email, visits, downloadedCv, allScores, _id, messages, strength, technologies, degree, description, git, linkedin }})
         } catch (error: any) {
             res.json(error)
         }

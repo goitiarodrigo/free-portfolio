@@ -9,7 +9,8 @@ interface getProjectsProps {
     uploadNewProject: (project: any, photo: string, id: any) => any
     userState: newUser
     signOut: () => void
-    verifyToken: (value: string) => Promise<any>
+    verifyToken: (value: string) => Promise<any>,
+    updateProfileUser: (id: string, token: string, dataToUpdate: any) => Promise<any>
 }
 
 export const UserContext = createContext<getProjectsProps>({} as getProjectsProps)

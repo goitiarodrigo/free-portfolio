@@ -144,6 +144,52 @@ label.labelInput {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: 200ms;
+}
+
+.profileContainer {
+  flex-direction: column;
+}
+
+.profileContainer button {
+  align-self: flex-end;
+  width: 12rem;
+  border: none;
+  padding: 1rem;
+  border-radius: 5px;
+  color: #658594;
+  font-weight: 600;
+  transition: 200ms;
+}
+
+.profileContainer button:hover {
+  transform: scale(102%);
+  transition: 200ms;
+}
+
+.newProjectContain {
+  width: 100vw;
+  height: 93vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.newProjectContain button {
+  align-self: flex-end;
+  width: 12rem;
+  border: none;
+  padding: 1rem;
+  border-radius: 5px;
+  color: #658594;
+  font-weight: 600;
+  transition: 200ms;
+}
+
+.newProjectContain button:hover {
+  transform: scale(102%);
+  transition: 200ms;
 }
 
 div.signContainer {
@@ -186,5 +232,10 @@ div.typeSign {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  color: red;
+}
+
+.chipsContainer input {
+  color: black !important;
 }
 

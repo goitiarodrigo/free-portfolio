@@ -1,27 +1,13 @@
-import { newUser } from "../data"
+import { ActionType, newUser } from "../data"
 const { sessionStorage } = window
 
-export type ActionType = 
-   | { type: "SIGN_IN", payload: any }
-   | { type: "SIGN_UP", payload: any }
-   | {type: "NEW_PROJECT", payload: any}
-
-
-
 export const userReducer = (state: newUser, action: ActionType): newUser => {
-    const { fullName, photoProfile, email, visits, downloadedCv, allScores, _id } = action.payload.response[action.payload.accessToData]
+    const { fullName, photoProfile, email, visits, downloadedCv, allScores, _id, messages, strength, technologies, degree, description, git, linkedin } = action.payload.response[action.payload.accessToData]
     switch (action.type) {
         case "SIGN_UP":
-            sessionStorage.setItem('visits', visits)
-            sessionStorage.setItem('fullName', fullName)
-            sessionStorage.setItem('photoProfile', photoProfile)
-            sessionStorage.setItem('downloadedCv', downloadedCv)
-            sessionStorage.setItem('allScores', allScores)
-            sessionStorage.setItem('email', email)
-            sessionStorage.setItem('_id', _id)
             sessionStorage.setItem('token', action.payload.response.token)
             return {
-                ...state, 
+                ...state,
                 fullName,
                 photoProfile,
                 email,
@@ -29,16 +15,16 @@ export const userReducer = (state: newUser, action: ActionType): newUser => {
                 downloadedCv,
                 allScores,
                 _id,
-                token: action.payload.token
+                messages,
+                strength,
+                technologies,
+                degree,
+                description,
+                git,
+                linkedin,
+                token: action.payload.response.token
             }
         case "SIGN_IN":
-            sessionStorage.setItem('visits', visits)
-            sessionStorage.setItem('fullName', fullName)
-            sessionStorage.setItem('photoProfile', photoProfile)
-            sessionStorage.setItem('downloadedCv', downloadedCv)
-            sessionStorage.setItem('allScores', allScores)
-            sessionStorage.setItem('email', email)
-            sessionStorage.setItem('_id', _id)
             sessionStorage.setItem('token', action.payload.response.token)
             return {
                 ...state, 
@@ -49,7 +35,32 @@ export const userReducer = (state: newUser, action: ActionType): newUser => {
                 downloadedCv,
                 allScores,
                 _id,
-                token: action.payload.token
+                messages,
+                strength,
+                technologies,
+                degree,
+                description,
+                git,
+                linkedin,
+                token: action.payload.response.token
+            }
+        case "UPDATE_DATA":
+            return {
+                ...state, 
+                fullName,
+                photoProfile,
+                email,
+                visits,
+                downloadedCv,
+                allScores,
+                _id,
+                messages,
+                strength,
+                technologies,
+                degree,
+                description,
+                git,
+                linkedin,
             }
         default:
            return state;

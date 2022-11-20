@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema(
                 month: {type: String}
             }
         ],
-        downloadedCv:  Number,
+        downloadedCv:  {type: Number, default: 0},
         allScores: [
            {
                 score: {type: Number}

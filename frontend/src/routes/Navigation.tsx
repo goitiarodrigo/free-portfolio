@@ -27,14 +27,15 @@ const Navigation = () => {
                                     )
                                 )
                             }
-                            <Route path="/linkedin/auth" element={<LinkedInCallback />} />
+                            
                             <Route path="/*" element={<Navigate to="/home" replace />} />
                         </Route>
                         <Route path="/" element={<PublicRoutes />}>
                             <Route path="/signin" element={<SignIn />} />
                             <Route path="/signup" element={<SignUp />} />
-                            <Route path="/linkedin/auth" element={<LinkedInCallback />} />
+                            
                         </Route>
+                        <Route path="/linkedin/auth" element={<LinkedInCallback />} />
                         <Route path="/template/:param" element={<AppTemplate />} />
                     </Routes>
                 </>

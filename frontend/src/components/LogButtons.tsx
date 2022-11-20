@@ -3,7 +3,7 @@ import { useLinkedIn } from "react-linkedin-login-oauth2"
 import LoginGithub from "react-login-github"
 import { GoogleLogin } from "react-google-login"
 import axios from "axios"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { newUser } from "./data"
 import { UserContext } from "../context/UserContext"
 import toast, { Toaster } from "react-hot-toast"
@@ -15,8 +15,10 @@ const LogButtons = ({ sign }) => {
     const navigate = useNavigate()
     const { signUp, signIn, userState } = useContext(UserContext)
 
-    const responseGoogle = async (response: any) => {
+    const [loader, setLoader] = useState(false)
 
+    const responseGoogle = async (response: any) => {
+        setLoader(true)
         const { name, googleId, imageUrl, email } = response.profileObj
         let newUser = {
             fullName: name,
@@ -24,16 +26,11 @@ const LogButtons = ({ sign }) => {
             photoProfile: imageUrl,
             password: googleId,
         }
-        
         signUser(newUser)
-        
     }
 
-     
-
-
     const onSuccess = async (response: any): Promise<void> => {
-        
+        setLoader(true)
         const res = await axios.post(`${REACT_APP_BACK_URL}/users/getProfileByGit`, {
             authCode: response.code,
           })
@@ -42,14 +39,17 @@ const LogButtons = ({ sign }) => {
           signUser(newUser)
           
     }
-    const onFailure = (response: any): void => console.error(response);
-
+    const onFailure = (response: any): void => {
+        setLoader(false)
+        console.error(response)
+    };
 
     const { linkedInLogin } = useLinkedIn({
         scope: "r_emailaddress r_liteprofile",
         clientId: REACT_APP_LINKEDIN_CLIENT_ID!,
         redirectUri: `${window.location.origin}/linkedin/auth`,
         onSuccess: async (authCode: string) => {
+            setLoader(true)
             const {
                 data: { response },
             } = await axios.post(`${REACT_APP_BACK_URL}/users/getProfileByLinkedin`, { authCode })
@@ -57,35 +57,39 @@ const LogButtons = ({ sign }) => {
             signUser(newUser)
           
         },
-      })
+    })
 
      const signUser = async (newUser: newUser) => {
         try {
             let res =  sign === "signUp" ? await signUp(newUser) : await signIn(newUser)
-                if (res.success){ 
-                    toast.success(`Bienvenido/a ${userState.fullName}`, {
-                        duration: 800
-                    })
-                    navigate("/home")
-                } else {
-                     toast.error(res.response, {
-                         duration: 800
-                     })
-                }
-            }catch(error: any) {
-                toast.error(error, {
-                    duration: 700
+            if (res.success){ 
+                toast.success(`Bienvenido/a ${userState.fullName}`, {
+                    duration: 1000
                 })
+                setLoader(false)
+                navigate("/home")
+            } else {
+                setLoader(false)
+                    toast.error(res.response, {
+                        duration: 1300
+                    })
             }
-           
+        } catch(error: any) {
+            setLoader(false)
+            toast.error(error.message, {
+                duration: 850
+            })
         }
+           
+    }
+
 
     return (
         <div className="logButtonsContainer">       
             <Toaster />     
             <GoogleLogin
                 clientId={REACT_APP_GOOGLE_CLIENT_ID!}
-                buttonText="Con Google"
+                buttonText={loader ? 'Iniciado sesión' : "Con Google"}
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
                 cookiePolicy={"single_host_origin"}
@@ -112,14 +116,14 @@ const LogButtons = ({ sign }) => {
                             2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0
                             .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
                         </svg>
-                            Con GitHub
+                            {loader ? 'Iniciado sesión' : 'Con GitHub'}
                         </a>
                 }
             />
 
             <img
                 onClick={linkedInLogin}
-                src='../../assets/linkedin.png'
+                src={`../../assets/${loader ? 'linkedinLoader' : 'linkedin'}.png`}
                 alt="Con LinkedIn"
                 style={{ maxWidth: '180px', cursor: 'pointer' }}
             />

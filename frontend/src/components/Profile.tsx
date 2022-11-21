@@ -3,6 +3,7 @@ import { newUser } from "./data";
 import toast, { Toaster } from "react-hot-toast";
 import Chips from "react-chips"
 import { UserContext } from "../context/UserContext";
+import { REACT_APP_BACK_URL } from "../constants";
 
 
 const Profile = () => {
@@ -58,6 +59,7 @@ const Profile = () => {
     return (
         <div className="profileContainer">
             <Toaster />
+            <span className="webPage">Tu página es: {`http://localhost:3000/template/${id}`}</span>
             <h2>Completa tu perfil</h2>
             <form className="inputsProfileContainer" onSubmit={upProfile}>
             <input

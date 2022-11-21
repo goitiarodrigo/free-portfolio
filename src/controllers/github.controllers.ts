@@ -5,7 +5,7 @@ const githubControllers = {
  getProfileGit: async (req: any, res: any) => {
     try {
       const response = await axios.post(
-        `https://github.com/login/oauth/access_token/?client_id=cd6173a77b378f016cdc&client_secret=50d27d9328db5e0900317b05fafe8164db2d53da&code=${req.body.authCode}`
+        `https://github.com/login/oauth/access_token/?client_id=${process.env.GITHUBCLIENTID}&client_secret=${process.env.GITHUBCLIENTSECRET}&code=${req.body.authCode}`
       )
       const link = new URLSearchParams(response.data)
       let token = Object.fromEntries(link).access_token

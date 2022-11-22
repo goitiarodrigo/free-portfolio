@@ -2,7 +2,7 @@ import axios from "axios";
 import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { REACT_APP_API_CLOUDINARY } from "../constants";
+import { REACT_APP_API_CLOUDINARY, REACT_APP_BACK_URL } from "../constants";
 import { UserContext } from "../context/UserContext";
 import { checkTypeImage } from "../utils/checkTypeImage";
 import { IProject } from "./data";
@@ -24,7 +24,6 @@ const NewProject = () => {
     })
 
     const handleNewProject = (e: ChangeEvent<HTMLInputElement> & ChangeEvent<HTMLTextAreaElement> ):void => {
-
         setNewproject({
         ...newProject,
         [e.target.name]:
@@ -32,19 +31,19 @@ const NewProject = () => {
         })
     }
 
-  
     const upNewProject = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const isGood = checkTypeImage(newProject.projectPhoto.name)
         if (!isGood) return toast.error("Extensión de imágen no soportado", {duration: 1000})
         try {
             setLoader(true)
+            const token = sessionStorage.getItem('token')!
             const FD = new FormData()
             FD.append("file", newProject.projectPhoto)
             FD.append("upload_preset", "Images")
-            let res = await axios.post(`${REACT_APP_API_CLOUDINARY}`, FD)
-            let photo = res.data.secure_url
-            let response = await uploadNewProject(newProject, photo, _id)
+            const res = await axios.post(`${REACT_APP_API_CLOUDINARY}`, FD)
+            const photo = res.data.secure_url
+            const response = await uploadNewProject(newProject, photo, _id, token)
             if (!response.success) {
                 setLoader(false)
                 return toast.error(`Ha ocurrido un error, intente nuevamente`, {
@@ -60,8 +59,7 @@ const NewProject = () => {
             duration: 1000})
         }
     }
-
-  
+ 
     return (
         <div className="newProjectContain">
             <Toaster />
@@ -93,7 +91,6 @@ const NewProject = () => {
                     onChange={handleNewProject}
                     value={newProject.linkProject}
                 />
-                
                 <input
                     className="form-control"
                     type="file"
@@ -112,7 +109,6 @@ const NewProject = () => {
                 ></textarea>
                 <button disabled={loader}>{loader ? 'Espere...' : 'Subir proyecto'}</button>
             </form>
-            
         </div>
     );
 }

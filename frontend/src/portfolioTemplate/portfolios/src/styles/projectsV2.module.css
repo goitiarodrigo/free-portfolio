@@ -8,6 +8,7 @@ div.container {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    color: white;
 }
 
 div.container h1 {

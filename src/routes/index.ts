@@ -19,12 +19,11 @@ router.route("/user/getUser/:id").get(userControllers.findOneUser)
 router.route("/user/verifyToken").get(passport.authenticate('jwt', {session: false}), userControllers.verifyToken)
 
 //Api for projects
-router.route("/project/newproject").post(projectsControllers.newProject)
-router.route("/project/editproject/:id").put(projectsControllers.editProject)
-router.route("/project/deleteproject/:id").delete(projectsControllers.deleteProject)
+router.route("/project/newproject").post(passport.authenticate('jwt', {session: false}), projectsControllers.newProject)
+router.route("/project/editproject/:id").put(passport.authenticate('jwt', {session: false}), projectsControllers.editProject)
+router.route("/project/deleteproject/:id").delete(passport.authenticate('jwt', {session: false}), projectsControllers.deleteProject)
 router.route("/project/getprojects/:id").get(projectsControllers.getProjects)
 router.route("/project/uploadPhoto").post(projectsControllers.uploadPhoto)
-
 
 //Api for log buttons
 router.route('/getToken').post(linkedinControllers.getToken)

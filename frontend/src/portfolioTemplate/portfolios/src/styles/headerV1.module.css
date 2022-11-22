@@ -27,8 +27,9 @@ div.header_container div.header {
     justify-content: space-between;
     width: 45rem;
     height: 30%;
-    position: absolute;
-    left: 17rem;
+    position: relative;
+    left: 10rem;
+    z-index: 999;
 }
 
 div.header_container > div h2 {
@@ -49,7 +50,7 @@ div.header_container > div p {
 ul.button_container {
     list-style-type: none;
     display: flex;
-    width: 100%;
+    width: 70%;
 }
 
 ul.button_container li:first-child {

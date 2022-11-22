@@ -12,12 +12,14 @@ interface newProject {
 
 const projectsControllers = {
     uploadPhoto: async (req: any, res: any) => {
+        
         try {
             const { file } = req.files
             const preset = req.body
-            const res = await axios.post("https://api.cloudinary.com/v1_1/mukeniola/images/upload", {file, preset})
-            console.log(res)
+            const response = await axios.post(`${process.env.LINKCLOUDINARY}`, req.files)
+            res.json({response})
         }catch(error: any) {
+            console.log(error.message)
             res.json({success: false, response: error.message})
         }
     },
@@ -53,6 +55,7 @@ const projectsControllers = {
     },
 
     deleteProject: async (req: any, res: any) => {
+        console.log('ejecuta?')
         try {
             let deletedProject = await Project.findOneAndDelete({_id: req.params.id})
             res.json({success: true, response: deletedProject})

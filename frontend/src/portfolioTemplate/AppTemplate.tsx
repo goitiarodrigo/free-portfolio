@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import Footer from "./portfolios/src/components/Footer"
 import BodyV1 from "./portfolios/src/components/v1/BodyV1"
@@ -8,6 +8,11 @@ import ProjectsV1 from "./portfolios/src/components/v1/ProjectsV1"
 import { REACT_APP_BACK_URL } from '../constants'
 import moment from 'moment'
 import axios from "axios"
+import { TemplateContext } from "./portfolios/src/context/TemplateContext"
+import { newUser } from "../components/data"
+import HeaderV2 from "./portfolios/src/components/v2/HeaderV2"
+import BodyV2 from "./portfolios/src/components/v2/BodyV2"
+import ProjectsV2 from "./portfolios/src/components/v2/ProjectsV2"
 
 moment.locale('es')
 
@@ -16,6 +21,7 @@ const AppTemplate = () => {
     const abortController = new AbortController()
     const signal = abortController
     const { param } = useParams()
+    const [userData, setUserData] = useState<newUser>()
 
     const addNewVisit = async () => {
         try {
@@ -24,6 +30,7 @@ const AppTemplate = () => {
             if (!data.success) {
                 return console.log(data.response)       
             }
+            setUserData(data.response)
             const { visits } = data.response
             const date = new Date()
             date.setMonth(date.getMonth())
@@ -53,13 +60,26 @@ const AppTemplate = () => {
     }, [])
 
     return (
-        <>
-            <HeaderV1 />
-            <BodyV1 />
-            <ProjectsV1 />
+        <TemplateContext.Provider value={{
+            userData
+        }}>
+            {
+                userData?.versionTemplate === 'v1' ?
+                    <>
+                        <HeaderV1 />
+                        <BodyV1 />
+                        <ProjectsV1 />
+                    </>
+                :
+                    <>
+                        <HeaderV2 />
+                        <BodyV2 />
+                        <ProjectsV2 />
+                    </>
+            }
             <Form />
             <Footer />
-        </>
+        </TemplateContext.Provider>
     )
 }
 

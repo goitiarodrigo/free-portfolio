@@ -1,6 +1,6 @@
 import styles from '../../styles/bodyV1.module.css'
-import Carousel, { autoplayPlugin } from '@brainhubeu/react-carousel';
-import '@brainhubeu/react-carousel/lib/style.css';
+import Flickity from "react-flickity-component";
+import { v4 as uuidv4 } from 'uuid';
 
 const arr = ["React", "React", "React", "React", "React", "React", "React", "React", "React", "React", "React"]
 let newArr: any[] = []
@@ -25,30 +25,26 @@ const BodyV1 = () => {
                     <a>Saber más.</a>
                 </div>
             </div>
-            <Carousel
-                plugins={[
-                'infinite',
-                    {
-                        resolve: autoplayPlugin,
-                        options: {
-                        interval: 4000,
-                        }
-                    },
-                ]}   
-                animationSpeed={2000}
+            <Flickity
+                className={styles.carousel_container}
+                disableImagesLoaded={true}
+                options={{
+                    initialIndex: 0,
+                    autoPlay: true,
+                    pageDots: false,
+                    prevNextButtons: false
+                }}
             >
-                {newArr.map(arra => {
+                {newArr.map((arra) => {
                     return (
-                        <div className={styles.tecnologies_container}>
-                        {
-                            arra.map(item => {
-                            return <span>{item}</span>
-                            })
-                        }
-                        </div>
+                        <div key={uuidv4()} className={styles.tecnologies_container}>
+                            {
+                                arra.map(item => <span key={uuidv4()}>{item}</span>)
+                            }
+                    </div>
                     )
                 })}
-            </Carousel>
+            </Flickity>
         </div>
     </div>
   )

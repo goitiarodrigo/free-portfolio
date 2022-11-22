@@ -7,7 +7,7 @@ const PanelAdmin = () => {
 
     const navigation = useNavigate()
     const { userState, signOut } = useContext(UserContext)
-    const { fullName, photoProfile } = userState
+    const { fullName, photoProfile, versionTemplate } = userState
 
     const handleLogOut = () => {
         toast.success(`Te espero pronto, ${fullName}`, {duration: 1300})
@@ -43,7 +43,7 @@ const PanelAdmin = () => {
                                             <NavLink to="/myprojects">Mis proyectos</NavLink>
                                         </li>
                                         <li className="nav-item">
-                                            <NavLink to="/newportfolio">Nuevo portfolio</NavLink>
+                                            <NavLink to="/newportfolio">{versionTemplate ? 'Cambiar' : 'Nuevo'} portfolio</NavLink>
                                         </li>
                                     </>
                                 :

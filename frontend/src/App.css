@@ -14,6 +14,8 @@ div.App {
   background-size: cover;
   width: 100vw;
   height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 li a {
@@ -110,17 +112,83 @@ div.message span:last-child {
   text-align: end;
 }
 
-div .newPortfolioContainer {
+div.newPortfolioContainer {
+  width: 100%;
+  height: 93%;
   display: flex;
+  align-items: center;
   justify-content: space-around;
 }
 
-div .photoProject {
+div.newPortfolioContainer div.templateToSelect {
+  height: 85vh;
+  width: 45vw;
+  overflow-y: scroll;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: 300ms;
+}
+
+div.templateToSelect {
+  cursor: pointer;
+}
+
+div.templateToSelect:hover {
+  transform: scale(102%);
+  transition: 300ms;
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+div.newPortfolioContainer div.templateToSelect::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, .35);
+  border-radius: 5px;
+}
+
+div.newPortfolioContainer div.templateToSelect::-webkit-scrollbar {
+  width: 0.3rem;
+}
+
+div.photoProject {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   margin-top: 2rem;
   border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.464);
+  width: 40vw;
+  height: 40vh;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+div.infoUserProject {
+  background-color: rgba(128, 128, 128, 0.529);
+  border-radius: 5px;
+  padding: 0.5rem;
+  width: 50%;
+}
+
+div.photoProject span:first-child {
+  align-self: flex-end;
+  cursor: pointer;
+  transition: 200ms;
+}
+
+div.photoProject span:first-child:hover {
+  transform: scale(107%);
+  transition: 200ms;
+}
+
+div.photoProject input {
+  width: fit-content;
+  border: none;
+  outline: none;
+  color: black;
+  margin-top: 0.3rem;
 }
 
 input.inputPhoto {
@@ -151,12 +219,37 @@ label.labelInput {
   flex-direction: column;
 }
 
-.profileContainer span.webPage {
+.profileContainer div.webPageContainer {
   position: absolute;
   right: 2rem;
   top: 5rem;
-  color: rgba(0, 0, 0, 0.605);
-  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(128, 128, 128, 0.32);
+  padding: 0.5rem;
+  width: 32rem;
+}
+
+div.webPageContainer span.webPage {
+  margin-top: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border: 1px solid rgba(0, 0, 0, 0.289);
+  border-radius: 5px;
+  padding: 0.2rem;
+  color: gray;
+  background-color: whitesmoke;
+}
+
+span.webPage span {
+  cursor: pointer;
+  transition: 200ms;
+}
+
+span.webPage span:hover {
+  transform: scale(105%);
+  transition: 200ms;
 }
 
 .profileContainer button {
@@ -240,10 +333,28 @@ div.typeSign {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  color: red;
 }
 
 .chipsContainer input {
   color: black !important;
+}
+
+.buttonToast {
+  border: none;
+  margin-left: 0.3rem;
+  padding: 0.1rem;
+}
+
+.buttonToast.yes {
+  background-color: crimson;
+}
+
+.buttonToast.no {
+  background-color: forestgreen;
+}
+
+.flickity-viewport {
+  width: 100%;
+  overflow: hidden;
 }
 

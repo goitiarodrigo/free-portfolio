@@ -130,11 +130,11 @@ div.anchor_container a:hover {
 div.projects_containerV1::-webkit-scrollbar-thumb, div.projects_containerV2::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, .35);
     border-radius: 5px;
-  }
+}
 
 div.projects_containerV1::-webkit-scrollbar, div.projects_containerV2::-webkit-scrollbar {
     width: 0.3rem;
-  }
+}
 
 @media (max-width: 1366px) {
     div.projects_containerV1, div.projects_containerV2 {

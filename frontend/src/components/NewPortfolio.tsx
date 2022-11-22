@@ -1,16 +1,43 @@
+import { useContext } from 'react'
+import toast, { Toaster } from "react-hot-toast";
+import { UserContext } from "../context/UserContext";
 
 
 const NewPortfolio = () => {
+
+    const { updateProfileUser, userState } = useContext(UserContext)
+    const { _id: id } = userState
+
+    const handleSelectTemplate = (type: string) => {
+        const token = sessionStorage.getItem('token')
+        toast((t) => (
+            <span style={{color: 'black'}}>
+                Seguro/a de elegir esta versión?
+                <button className="buttonToast yes" onClick={async () => {
+                    const response = await updateProfileUser(id!, token!, {versionTemplate: type})
+                    if (response.success) {
+                        toast.dismiss(t.id)
+                        return toast.success('Todo salió bien!', {duration: 1000})
+                    }
+                    toast.error('Ha ocurrido un error', {duration: 1000})
+                }}>
+                    Si
+                </button>
+                <button className="buttonToast no" onClick={() => toast.dismiss(t.id)}>
+                    No
+                </button>
+            </span>
+        ));
+    }
+
     return (
         <div className="newPortfolioContainer">
-            <div style={{width: "30vw", height: "70vh", maxHeight: "70vh", overflowY: "scroll"}}>
-                <img style={{height: "140vh", width: "100%"}} src="https://i.postimg.cc/yNWGNLJ9/Follio-Multipurpose-Portfolio-React-Template.png" alt="..."/>
+            <Toaster />
+            <div onClick={() => handleSelectTemplate('v1')} className="templateToSelect">
+                <img style={{height: "140vh", width: "100%"}} src="https://res.cloudinary.com/mukeniola/image/upload/v1669061650/samples/zhritu3da1ybsxld6zme.jpg" alt="..."/>
             </div>
-            <div style={{width: "30vw", height: "70vh", maxHeight: "70vh", overflowY: "scroll"}}>
-                <img style={{height: "140vh", width: "100%"}} src="https://i.postimg.cc/wjqPCqgw/Follio-Multipurpose-Portfolio-React-Template-1.png" alt="..."/>
-            </div>
-            <div style={{width: "30vw", height: "70vh", maxHeight: "70vh", overflowY: "scroll"}}>
-                <img style={{height: "140vh", width: "100%"}} src="https://i.postimg.cc/pLs7xwdR/Follio-Multipurpose-Portfolio-React-Template-2.png" alt="..."/>
+            <div onClick={() => handleSelectTemplate('v2')} className="templateToSelect">
+                <img style={{height: "140vh", width: "100%"}} src="https://res.cloudinary.com/mukeniola/image/upload/v1669064179/samples/cqii0fnt58v9fou0rqdx.jpg" alt="..."/>
             </div>
         </div>
     )

@@ -19,27 +19,22 @@ const ProjectsV2 = () => {
     <div id='projects' className={styles.container}>
         <h1>Proyectos</h1>
         <div className={styles.projects_container}>
-            {
-                arrProjects.map((project, index) => {
-                    return (
-                        <div key={index} style={{backgroundImage: `url(${project.image})`}} className={styles.project_image}>
-                            <div className={styles.effectFirst}>
-                                <div className={styles.effect}>
-                                    <div className={styles.description_container}>
-                                        <h2>{`${project.name} ${index}` }</h2>
-                                        <p>{project.description}</p>
-                                        <div className={styles.anchor_container}>
-                                            {project.linkPage && <a target="_blank" rel="noreferrer" href={project.linkPage}>{openPageSvg}</a>}
-                                            <a target="_blank" rel="noreferrer" href={project.linkLinkedin}>{gitSvg}</a>
-                                        </div>
-                                    </div>
+            {arrProjects.map((project, index) => (
+                <div key={index} style={{backgroundImage: `url(${project.image})`}} className={styles.project_image}>
+                    <div className={styles.effectFirst}>
+                        <div className={styles.effect}>
+                            <div className={styles.description_container}>
+                                <h2>{`${project.name} ${index}` }</h2>
+                                <p>{project.description}</p>
+                                <div className={styles.anchor_container}>
+                                    {project.linkPage && <a target="_blank" rel="noreferrer" href={project.linkPage}>{openPageSvg}</a>}
+                                    <a target="_blank" rel="noreferrer" href={project.linkLinkedin}>{gitSvg}</a>
                                 </div>
                             </div>
-                            
                         </div>
-                    )
-                })
-            }
+                    </div>
+                </div>
+            ))}
         </div>
     </div>
   )

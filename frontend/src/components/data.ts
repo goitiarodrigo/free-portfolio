@@ -22,6 +22,7 @@ export interface newUser {
       messages?: string[],
       visits?: countVisit[],
       downloadedCv?: number,
+      versionTemplate?: string
       allScores?: countScore[],
   }
 

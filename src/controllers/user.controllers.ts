@@ -70,9 +70,9 @@ const userControllers = {
     },
 
     verifyToken: (req: any, res: any) => {
-        const { fullName, photoProfile, email, visits, downloadedCv, allScores, _id, messages, strength, technologies, degree, description, git, linkedin } = req.user
+        const { fullName, photoProfile, email, visits, downloadedCv, allScores, _id, messages, strength, technologies, degree, description, git, linkedin, versionTemplate } = req.user
         try {
-            res.json({success: true, userFound: { fullName, photoProfile, email, visits, downloadedCv, allScores, _id, messages, strength, technologies, degree, description, git, linkedin }})
+            res.json({success: true, userFound: { fullName, photoProfile, email, visits, downloadedCv, allScores, _id, messages, strength, technologies, degree, description, git, linkedin, versionTemplate }})
         } catch (error: any) {
             res.json(error)
         }

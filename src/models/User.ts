@@ -12,6 +12,7 @@ const UserSchema = new mongoose.Schema(
         technologies: [{type: Array}],
         description: {type: String},
         photoProfile: {type: String},
+        versionTemplate: String,
         visits: [
             {
                 visit: {type: Number},

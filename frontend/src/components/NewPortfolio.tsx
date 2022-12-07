@@ -12,7 +12,7 @@ const NewPortfolio = () => {
         const token = sessionStorage.getItem('token')
         toast((t) => (
             <span style={{color: 'black'}}>
-                Seguro/a de elegir esta versión?
+                Una vez elegida la versón no podrás elegir otro. <br/> <br/> Seguro/a de elegir esta?.
                 <button className="buttonToast yes" onClick={async () => {
                     const response = await updateProfileUser(id!, token!, {versionTemplate: type})
                     if (response.success) {

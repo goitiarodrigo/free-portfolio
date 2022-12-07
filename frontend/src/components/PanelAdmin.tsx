@@ -15,6 +15,10 @@ const PanelAdmin = () => {
         navigation('/signin')
     }
 
+    const activeStyle = {
+        textDecoration: "underline",
+    }
+
     return (
         <div>
             <Toaster />
@@ -31,20 +35,50 @@ const PanelAdmin = () => {
                                 {window.sessionStorage.getItem('token') ?
                                     <>
                                         <li className="nav-item">
-                                            <NavLink to ="/home">Dashboard</NavLink>
+                                            <NavLink
+                                                to ="/home"
+                                                style={({ isActive }) =>
+                                                    isActive ? activeStyle : undefined
+                                                }
+                                            >Dashboard</NavLink>
                                         </li>
                                         <li className="nav-item">
-                                            <NavLink to="/newproject">Nuevo proyecto</NavLink>
+                                            <NavLink
+                                                to="/newproject"
+                                                style={({ isActive }) =>
+                                                    isActive ? activeStyle : undefined
+                                                }
+                                            >Nuevo proyecto</NavLink>
                                         </li>
                                         <li className="nav-item">
-                                            <NavLink to="/profile">Mi perfil</NavLink>
+                                            <NavLink
+                                                to="/profile"
+                                                style={({ isActive }) =>
+                                                    isActive ? activeStyle : undefined
+                                                }    
+                                            >Mi perfil</NavLink>
                                         </li>
                                         <li className="nav-item">
-                                            <NavLink to="/myprojects">Mis proyectos</NavLink>
+                                            <NavLink
+                                                to="/myprojects"
+                                                style={({ isActive }) =>
+                                                    isActive ? activeStyle : undefined
+                                                }
+                                            >Mis proyectos</NavLink>
                                         </li>
-                                        <li className="nav-item">
-                                            <NavLink to="/newportfolio">{versionTemplate ? 'Cambiar' : 'Nuevo'} portfolio</NavLink>
-                                        </li>
+                                        {
+                                            !versionTemplate ?
+                                            <li className="nav-item">
+                                                <NavLink
+                                                    to="/newportfolio"
+                                                    style={({ isActive }) =>
+                                                        isActive ? activeStyle : undefined
+                                                    }
+                                                >Nuevo portfolio</NavLink>
+                                            </li>
+                                            :
+                                            null
+                                        }
                                     </>
                                 :
 

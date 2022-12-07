@@ -346,11 +346,15 @@ div.typeSign {
 }
 
 .buttonToast.yes {
-  background-color: crimson;
+  background-color: forestgreen;
+  padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+  border-radius: 8px;
 }
 
 .buttonToast.no {
-  background-color: forestgreen;
+  background-color: crimson;
+  padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+  border-radius: 8px;
 }
 
 .flickity-viewport {
